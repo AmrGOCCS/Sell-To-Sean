@@ -123,28 +123,37 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
       <div class="space-y-4">
         <div>
           <label class="field-label" for={`${id}-name`}>Your name</label>
-          <input class="field-input" type="text" id={`${id}-name`} name="name" autocomplete="name" required data-error-msg="Please tell us your name." />
+          <div class="field-wrap">
+            <input class="field-input !pr-10" type="text" id={`${id}-name`} name="name" autocomplete="name" required data-error-msg="Please tell us your name." />
+            <span class="field-check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          </div>
           <p class="field-error" role="alert"></p>
         </div>
         <div>
           <label class="field-label" for={`${id}-phone`}>Phone number</label>
-          <input
-            class="field-input"
-            type="tel"
-            id={`${id}-phone`}
-            name="phone"
-            autocomplete="tel"
-            inputmode="tel"
-            placeholder="(614) 555-0123"
-            required
-            data-phone-mask
-            data-error-msg="Please enter a 10-digit phone number so we can deliver your offer."
-          />
+          <div class="field-wrap">
+            <input
+              class="field-input !pr-10"
+              type="tel"
+              id={`${id}-phone`}
+              name="phone"
+              autocomplete="tel"
+              inputmode="tel"
+              placeholder="(614) 555-0123"
+              required
+              data-phone-mask
+              data-error-msg="Please enter a 10-digit phone number so we can deliver your offer."
+            />
+            <span class="field-check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          </div>
           <p class="field-error" role="alert"></p>
         </div>
         <div>
           <label class="field-label" for={`${id}-email`}>Email</label>
-          <input class="field-input" type="email" id={`${id}-email`} name="email" autocomplete="email" required data-error-msg="Please enter a valid email address." />
+          <div class="field-wrap">
+            <input class="field-input !pr-10" type="email" id={`${id}-email`} name="email" autocomplete="email" required data-error-msg="Please enter a valid email address." />
+            <span class="field-check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          </div>
           <p class="field-error" role="alert"></p>
         </div>
 
@@ -239,7 +248,7 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
     }
 
     function setError(field: Element, msg: string) {
-      const err = (field.closest('div, fieldset') as HTMLElement).querySelector('.field-error');
+      const err = (field.closest('div:not(.field-wrap), fieldset') as HTMLElement).querySelector('.field-error');
       if (err) { err.textContent = msg; err.classList.add('is-visible'); }
       if (field instanceof HTMLInputElement) field.setAttribute('aria-invalid', 'true');
     }
@@ -270,8 +279,17 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
       return ok;
     }
 
-    form.addEventListener('input', () => {
+    form.addEventListener('input', (e) => {
       if (!started) { started = true; dl('form_start'); }
+      // Live success feedback on text fields (green ✓ when complete)
+      const input = e.target as HTMLInputElement;
+      if (input.matches?.('.field-input')) {
+        let valid = input.value.trim().length > 1;
+        if (input.type === 'email') valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value.trim());
+        if (input.type === 'tel') valid = input.value.replace(/\D/g, '').length === 10;
+        input.setAttribute('data-valid', String(valid));
+        if (valid) input.removeAttribute('aria-invalid');
+      }
     }, { once: false });
 
     form.addEventListener('click', (e) => {

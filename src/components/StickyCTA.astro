@@ -22,6 +22,16 @@ import { SITE } from '../data/site.js';
   const bar = document.getElementById('sticky-cta');
   if (bar) {
     bar.classList.remove('hidden');
+
+    // If this page has a quick-capture form, jump into it instead of navigating away
+    const quick = document.querySelector('[data-quick-form]');
+    if (quick) {
+      bar.querySelector('a[href="/get-offer/"]')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        quick.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => quick.querySelector('input')?.focus({ preventScroll: true }), 450);
+      });
+    }
     const forms = document.querySelectorAll('[data-lead-form], [data-quick-form]');
     let pastHero = false;
     let formVisible = false;

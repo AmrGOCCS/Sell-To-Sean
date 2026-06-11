@@ -84,10 +84,29 @@
   50% { box-shadow: 0 8px 30px -6px rgba(186, 12, 19, 0.55), 0 0 0 12px rgba(219, 47, 53, 0); }
 }
 @keyframes wiggle {
-  0%, 92%, 100% { transform: rotate(0); }
-  94% { transform: rotate(-6deg); }
-  96% { transform: rotate(6deg); }
-  98% { transform: rotate(-3deg); }
+  0%, 86%, 100% { transform: rotate(0); }
+  88% { transform: rotate(-14deg); }
+  91% { transform: rotate(12deg); }
+  94% { transform: rotate(-8deg); }
+  97% { transform: rotate(4deg); }
+}
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -24px) scale(1.12); }
+  66% { transform: translate(-28px, 20px) scale(0.94); }
+}
+@keyframes gradient-slide {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(0.6em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.4); }
+  70% { transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 @layer base {
@@ -158,6 +177,18 @@
   }
   .field-input[aria-invalid='true'] {
     @apply border-2 border-red-600;
+  }
+  /* Live success state: field turns calm green and earns a ✓ as you type */
+  .field-wrap { @apply relative; }
+  .field-wrap .field-check {
+    @apply pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 text-emerald-600 opacity-0;
+  }
+  .field-wrap:has(.field-input[data-valid='true']) .field-input {
+    @apply border-emerald-500 bg-emerald-50/40;
+  }
+  .field-wrap:has(.field-input[data-valid='true']) .field-check {
+    opacity: 1;
+    animation: pop-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   .field-label {
     @apply mb-1.5 block text-sm font-semibold text-slate-700;
@@ -258,4 +289,51 @@
   .animate-float { animation: var(--animate-float); }
   .animate-float-slow { animation: var(--animate-float-slow); }
   .step-animate { animation: var(--animate-step-in); }
+  .animate-wiggle { display: inline-block; animation: wiggle 3.5s ease-in-out infinite; }
+  .animate-blob { animation: blob-drift 16s ease-in-out infinite; }
+  .animate-gradient {
+    background-size: 220% 220%;
+    animation: gradient-slide 8s ease-in-out infinite;
+  }
+
+  /* Rotating word: all candidates stack in one grid cell, so the line never
+     shifts layout. JS toggles .is-on; without JS the first word shows. */
+  .rotator { display: inline-grid; vertical-align: bottom; }
+  .rotator > span {
+    grid-area: 1 / 1;
+    visibility: hidden;
+    white-space: nowrap;
+  }
+  .rotator > span.is-on {
+    visibility: visible;
+    animation: word-in 0.4s ease both;
+  }
+  html:not(.js) .rotator > span:first-child { visibility: visible; }
+
+  /* Speech bubble from Sean (friendly, chat-like) */
+  .bubble {
+    @apply relative rounded-2xl rounded-bl-md border border-brand-100 bg-brand-50 px-4 py-3 text-sm leading-relaxed text-brand-900;
+  }
+  .bubble::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    bottom: 10px;
+    width: 14px;
+    height: 14px;
+    background: inherit;
+    border-left: 1px solid var(--color-brand-100);
+    border-bottom: 1px solid var(--color-brand-100);
+    transform: rotate(45deg);
+  }
+
+  /* FAQ answers ease in when opened */
+  details[open] .faq-a { animation: fade-down 0.3s ease both; }
+
+  /* Top scroll-progress bar */
+  .scroll-progress {
+    @apply fixed top-0 left-0 z-50 h-1 w-full origin-left;
+    background: linear-gradient(90deg, var(--color-clay-500), var(--color-brand-500));
+    transform: scaleX(0);
+  }
 }
