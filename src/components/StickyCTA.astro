@@ -1,0 +1,42 @@
+---
+import { SITE } from '../data/site.js';
+---
+
+<!-- Mobile-only sticky bar. Appears after the hero scrolls away; hides while a
+     lead form is on screen so there's never a competing CTA in the viewport. -->
+<div
+  id="sticky-cta"
+  class="fixed inset-x-0 bottom-0 z-40 hidden translate-y-full border-t border-stone-200 bg-white/95 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur transition-transform duration-200 md:!hidden"
+  aria-hidden="true"
+>
+  <div class="flex gap-2 px-3 pt-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom))]">
+    <a href={SITE.phoneHref} class="btn-secondary flex-1 !px-3 text-sm" data-track="phone_click" data-loc="sticky_bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+      Call Sean
+    </a>
+    <a href="/get-offer/" class="btn-primary flex-1 !px-3 text-sm" data-track="cta_click" data-loc="sticky_bar">{SITE.cta}</a>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById('sticky-cta');
+  if (bar) {
+    bar.classList.remove('hidden');
+    const forms = document.querySelectorAll('[data-lead-form], [data-hero-form]');
+    let pastHero = false;
+    let formVisible = false;
+    const update = () => {
+      const show = pastHero && !formVisible;
+      bar.classList.toggle('translate-y-full', !show);
+      bar.setAttribute('aria-hidden', String(!show));
+    };
+    addEventListener('scroll', () => { pastHero = scrollY > 420; update(); }, { passive: true });
+    if (forms.length) {
+      const io = new IntersectionObserver(
+        (entries) => { formVisible = entries.some((e) => e.isIntersecting); update(); },
+        { threshold: 0.15 }
+      );
+      forms.forEach((f) => io.observe(f));
+    }
+  }
+</script>

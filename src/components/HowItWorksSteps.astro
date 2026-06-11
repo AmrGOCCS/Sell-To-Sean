@@ -1,0 +1,32 @@
+---
+import { SITE } from '../data/site.js';
+
+const steps = [
+  {
+    title: 'Tell us about your house',
+    body: `Start with just the address — it takes about 2 minutes. Sean or a team member calls you within ${SITE.callbackPromise} to hear your situation. No pressure, no scripts.`,
+  },
+  {
+    title: 'Get your written cash offer',
+    body: 'We do a quick walkthrough — in person, or from photos if you\'re out of town — and put a fair cash offer in writing, usually within 24 hours. We\'ll show you how we got to the number.',
+  },
+  {
+    title: 'Pick your closing date',
+    body: 'Close in as little as 7 days, or take the time you need. We close at a licensed Ohio title company, and you walk away with your money. No fees come out of it.',
+  },
+];
+---
+
+<ol class="grid gap-6 md:grid-cols-3">
+  {
+    steps.map((step, i) => (
+      <li class="card relative">
+        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-pine-700 font-display text-xl font-bold text-white" aria-hidden="true">
+          {i + 1}
+        </span>
+        <h3 class="mt-4 text-xl">{step.title}</h3>
+        <p class="mt-2 leading-relaxed text-stone-600">{step.body}</p>
+      </li>
+    ))
+  }
+</ol>

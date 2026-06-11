@@ -1,0 +1,90 @@
+---
+import { SITE } from '../data/site.js';
+
+const nav = [
+  { label: 'How It Works', href: '/how-it-works/' },
+  { label: 'About Sean', href: '/about/' },
+  { label: 'Reviews', href: '/reviews/' },
+  { label: 'Before & After', href: '/before-after/' },
+  { label: 'FAQ', href: '/faq/' },
+];
+const current = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-stone-200 bg-cream/95 backdrop-blur">
+  <div class="container-site flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2" aria-label="Sell to Sean — home">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <rect width="34" height="34" rx="8" fill="var(--color-pine-800)"></rect>
+        <path d="M17 7 7 15.5h3V26h6v-6h2v6h6V15.5h3L17 7Z" fill="#faf7f1"></path>
+      </svg>
+      <span class="font-display text-lg font-bold text-pine-950">Sell to Sean</span>
+    </a>
+
+    <nav aria-label="Main" class="hidden items-center gap-6 lg:flex">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={current === item.href ? 'page' : undefined}
+            class:list={[
+              'text-sm font-semibold text-stone-700 hover:text-pine-800',
+              current === item.href && 'text-pine-800 underline underline-offset-8',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={SITE.phoneHref}
+        class="hidden items-center gap-1.5 text-sm font-bold text-pine-800 hover:text-pine-600 sm:flex"
+        data-track="phone_click"
+        data-loc="header"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+        {SITE.phone}
+      </a>
+      <a href="/get-offer/" class="btn-primary !min-h-10 !px-4 !py-2 text-sm">{SITE.cta}</a>
+      <button
+        type="button"
+        class="flex h-11 w-11 items-center justify-center rounded-lg text-pine-900 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+        id="menu-toggle"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-stone-200 bg-cream lg:hidden">
+    <div class="container-site flex flex-col py-2">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="border-b border-stone-100 py-3.5 text-base font-semibold text-stone-800">
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/contact/" class="py-3.5 text-base font-semibold text-stone-800">Contact</a>
+      <a href={SITE.phoneHref} class="py-3.5 text-base font-bold text-pine-800" data-track="phone_click" data-loc="mobile_menu">
+        📞 Call {SITE.phone}
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+</script>

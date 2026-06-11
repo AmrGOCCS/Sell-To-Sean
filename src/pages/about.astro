@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TestimonialCards from '../components/TestimonialCards.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site.js';
+import { FEATURED_REVIEWS } from '../data/reviews.js';
+import { breadcrumbSchema } from '../lib/schema.js';
+
+const title = 'About Sean Grabow — Columbus\' Local Cash Home Buyer | Sell to Sean';
+const description =
+  'Sean Grabow is a Columbus native who has been buying houses for cash since 2018. Meet the real person and the local team behind Sell to Sean.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About Sean', path: '/about/' }])]}
+>
+  <section class="bg-stone-warm py-12 sm:py-16">
+    <div class="container-site grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <div>
+        <span class="eyebrow">{SITE.tagline}</span>
+        <h1 style="font-size: var(--text-display)">The "Sean" in Sell to Sean is a real person.</h1>
+        <p class="mt-4 text-lg leading-relaxed text-stone-700">
+          Sean Grabow grew up in Columbus, went through a stressful home sale of his own, and
+          decided in {SITE.founded} there should be a simpler way for his neighbors to sell.
+          That became {SITE.legalName} — better known around town as Sell to Sean.
+        </p>
+      </div>
+      <img
+        src="/images/sean-placeholder.svg"
+        alt="[PHOTO OF SEAN GRABOW — replace with the current 'Sean Profile Pic' from the existing site]"
+        width="480"
+        height="560"
+        fetchpriority="high"
+        class="mx-auto w-full max-w-sm rounded-2xl border border-stone-200 shadow-lg"
+      />
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20">
+    <div class="prose-site container-site max-w-3xl">
+      <h2>Why Sean started this company</h2>
+      <p>
+        Selling a house the traditional way can be brutal when life is already hard: repairs you
+        can't afford, strangers walking through your home, deals that die in week five. Sean
+        lived that. So he built the company he wished he could have called — one that buys
+        directly, explains every number, and treats the seller like a neighbor, because here,
+        they are.
+      </p>
+      <p>
+        [PLACEHOLDER — 2–3 sentences from Sean in his own words about that first stressful sale
+        and what he promised himself he'd do differently. This paragraph is the heart of the
+        page; it must be real.]
+      </p>
+
+      <h2>How the team works</h2>
+      <p>Three rules, straight from the current company playbook:</p>
+      <ul>
+        <li><strong>Listen first.</strong> Your situation decides the plan — not a script.</li>
+        <li><strong>Explain everything clearly.</strong> Every number in the offer, out loud, until it makes sense.</li>
+        <li><strong>Move at the homeowner's pace.</strong> Seven days or seven months. Your call.</li>
+      </ul>
+      <p>
+        It's not just Sean. Columbus sellers mention Liam, Noah, Marie, Jessica, and Adam by
+        name in their reviews — because this is a local team people actually meet, at a real
+        office at {SITE.address.street} in Columbus.
+      </p>
+      <p>[TEAM PHOTOS — add a candid photo and one-line bio for each team member]</p>
+
+      <h2>What we actually do with the houses</h2>
+      <p>
+        We're not wholesalers flipping contracts. We buy houses, renovate them with local crews,
+        and turn neglected properties back into homes — you can see the work on our
+        <a href="/before-after/">Before &amp; After page</a>. That's also why we can pay fairly:
+        we know our real repair costs, not scary inflated ones.
+      </p>
+
+      <h2>Check us out before you call</h2>
+      <p>
+        You should vet anyone who offers to buy your house. Here's where to look us up:
+        our <a href={SITE.social.googleMaps}>Google listing</a>, our
+        <a href={SITE.social.yelp}>Yelp page</a> (under {SITE.legalName}), our
+        <a href={SITE.social.linkedin}>LinkedIn</a>, and the BBB. {SITE.bbb} [VERIFY].
+        We've been at this since {SITE.founded}, and the paper trail is public.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-stone-warm py-14 sm:py-20" aria-labelledby="about-reviews">
+    <div class="container-site">
+      <h2 id="about-reviews" class="mb-8" style="font-size: var(--text-h2)">What neighbors say about working with Sean</h2>
+      <TestimonialCards reviews={FEATURED_REVIEWS.slice(0, 3)} />
+    </div>
+  </section>
+
+  <CTASection formId="about-cta-form" heading="Talk to Sean's team today." />
+</BaseLayout>

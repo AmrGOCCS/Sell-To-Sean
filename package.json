@@ -1,0 +1,20 @@
+{
+  "name": "sell-to-sean",
+  "version": "1.0.0",
+  "description": "Sell to Sean — Columbus cash home buyer. Conversion-focused static site.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "qa": "node scripts/qa.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.0",
+    "@fontsource-variable/inter": "^5.2.5",
+    "@fontsource-variable/lora": "^5.2.5",
+    "@tailwindcss/vite": "^4.1.8",
+    "astro": "^5.8.0",
+    "tailwindcss": "^4.1.8"
+  }
+}

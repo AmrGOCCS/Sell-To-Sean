@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site.js';
+
+const title = 'Privacy Policy | Sell to Sean';
+const description = 'How Sell to Sean (Central City Solutions LLC) collects, uses, and protects your information.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="py-12 sm:py-16">
+    <div class="prose-site container-site max-w-3xl">
+      <h1 style="font-size: var(--text-h2)">Privacy Policy</h1>
+      <p><em>Last updated: [DATE — set at launch]. <strong>[HAVE ATTORNEY REVIEW THIS ENTIRE PAGE BEFORE LAUNCH.]</strong></em></p>
+
+      <p>
+        This policy explains how {SITE.legalName}, doing business as Sell to Sean ("we," "us"),
+        located at {SITE.address.street}, {SITE.address.city}, {SITE.address.state}
+        {SITE.address.zip}, handles your information when you use selltosean.com or contact us.
+      </p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Information you give us:</strong> your name, phone number, email, property address, and details about your property and situation when you fill out a form or call us.</li>
+        <li><strong>Technical information:</strong> standard analytics data such as pages visited, device type, and how you found us (for example, ad-click identifiers like gclid or fbclid).</li>
+      </ul>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To respond to your inquiry, prepare your cash offer, and complete a sale if you choose to sell to us.</li>
+        <li>To contact you by phone, text message, or email as described in the consent you give on our forms.</li>
+        <li>To understand how our website performs and improve it.</li>
+      </ul>
+
+      <h2>What we never do</h2>
+      <p>
+        <strong>We do not sell your information to other investors, lead brokers, or marketing
+        lists.</strong> Your inquiry goes to Sean's team and stays there. We share information
+        only with service providers who help us operate (for example, our CRM, title companies
+        for a closing you've agreed to, or our messaging provider), and when the law requires it.
+      </p>
+
+      <h2>Text messages (SMS)</h2>
+      <p>
+        If you consent to text messages, message frequency varies, and message and data rates
+        may apply. Reply <strong>STOP</strong> at any time to opt out, or <strong>HELP</strong>
+        for help. Consent to marketing texts is never a condition of selling your house to us.
+        Mobile opt-in data and consent are not shared with third parties for their own marketing.
+      </p>
+
+      <h2>Your choices</h2>
+      <ul>
+        <li>Opt out of texts by replying STOP; opt out of emails via the unsubscribe link; or call us at {SITE.phone} and ask us to stop contacting you.</li>
+        <li>You may request a copy of the information we hold about you, or ask us to delete it, by contacting us at {SITE.email} or {SITE.phone}.</li>
+      </ul>
+
+      <h2>Cookies &amp; analytics</h2>
+      <p>
+        We use basic analytics to measure how the site is used. [UPDATE AT LAUNCH with the
+        actual analytics/ads tools installed — e.g., Google Analytics 4, Google Ads, Meta
+        Pixel — and link their opt-outs.]
+      </p>
+
+      <h2>Children</h2>
+      <p>Our services are for adults. We do not knowingly collect information from anyone under 18.</p>
+
+      <h2>Changes &amp; contact</h2>
+      <p>
+        We'll post any changes to this policy on this page. Questions? Call {SITE.phone} or
+        write to {SITE.legalName}, {SITE.address.street}, {SITE.address.city},
+        {SITE.address.state} {SITE.address.zip}.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

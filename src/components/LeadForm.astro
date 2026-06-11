@@ -1,0 +1,335 @@
+---
+/**
+ * The conversion machine: 4-step progressive-disclosure lead form.
+ * Step 1 address only (lowest friction) → 2 condition → 3 timeline →
+ * 4 contact + TCPA consent. Progress bar, back nav, inline validation,
+ * phone mask, per-step dataLayer events, ad-attribution passthrough.
+ *
+ * Submission: POSTs JSON to PUBLIC_LEAD_WEBHOOK_URL (see README to wire a
+ * CRM/Zapier/Make). Without a webhook configured it logs the payload and
+ * continues to /thank-you/ so the UX is testable end-to-end.
+ */
+import { SITE } from '../data/site.js';
+
+interface Props {
+  id?: string; // unique per page if rendered more than once
+  heading?: string;
+}
+const { id = 'lead-form', heading = 'Get your free cash offer' } = Astro.props;
+const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
+---
+
+<section class="card mx-auto max-w-xl !p-6 sm:!p-8" aria-labelledby={`${id}-heading`}>
+  <h2 id={`${id}-heading`} class="text-2xl">{heading}</h2>
+  <p class="mt-1 mb-5 text-sm text-stone-600">
+    Takes about 2 minutes · No obligation · Your info stays private
+  </p>
+
+  <form data-lead-form data-webhook={webhookUrl} novalidate>
+    <!-- Progress -->
+    <div class="mb-6">
+      <div class="mb-1.5 flex justify-between text-xs font-semibold text-stone-500">
+        <span data-step-label>Step 1 of 4 — Your property</span>
+        <span data-step-count>25%</span>
+      </div>
+      <div class="h-2 rounded-full bg-stone-200" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="Form progress">
+        <div data-progress class="h-2 w-1/4 rounded-full bg-pine-600 transition-all duration-300"></div>
+      </div>
+    </div>
+
+    <!-- STEP 1: address -->
+    <fieldset data-step="1">
+      <legend class="sr-only">Property address</legend>
+      <label class="field-label" for={`${id}-address`}>Property street address</label>
+      <input
+        class="field-input"
+        type="text"
+        id={`${id}-address`}
+        name="street_address"
+        autocomplete="street-address"
+        placeholder="123 Main St, Columbus, OH"
+        required
+        data-error-msg="Please enter the property address so we can prepare your offer."
+      />
+      <p class="field-error" role="alert"></p>
+      <button type="button" class="btn-primary mt-4 w-full" data-next>Get My Cash Offer →</button>
+      <p class="mt-3 text-center text-xs text-stone-500">Free written offer · You decide after you see the number</p>
+    </fieldset>
+
+    <!-- STEP 2: condition -->
+    <fieldset data-step="2" hidden>
+      <legend class="field-label !text-base">What kind of shape is the house in?</legend>
+      <p class="mb-3 text-sm text-stone-600">Rough guess is fine — we buy in any condition.</p>
+      <div class="space-y-2.5" role="radiogroup" data-required-group data-error-msg="Pick the closest one — a rough guess is fine.">
+        {
+          [
+            ['move-in-ready', 'Move-in ready', 'Just needs a new owner'],
+            ['some-work', 'Needs some work', 'Dated kitchen, carpet, paint…'],
+            ['major-repairs', 'Needs major repairs', "Roof, systems, damage — we've seen it all"],
+            ['not-sure', "I'm not sure", "That's okay — we'll figure it out together"],
+          ].map(([val, label, hint]) => (
+            <label class="chip-option">
+              <span>
+                <span class="block">{label}</span>
+                <span class="block text-sm font-normal text-stone-500">{hint}</span>
+              </span>
+              <input type="radio" name="condition" value={val} class="h-5 w-5 accent-pine-700" />
+            </label>
+          ))
+        }
+      </div>
+      <p class="field-error" role="alert"></p>
+      <div class="mt-4 flex gap-3">
+        <button type="button" class="btn-secondary" data-back>← Back</button>
+        <button type="button" class="btn-primary flex-1" data-next>Next →</button>
+      </div>
+    </fieldset>
+
+    <!-- STEP 3: timeline -->
+    <fieldset data-step="3" hidden>
+      <legend class="field-label !text-base">How soon would you like to sell?</legend>
+      <p class="mb-3 text-sm text-stone-600">We close on your schedule — fast or slow.</p>
+      <div class="space-y-2.5" role="radiogroup" data-required-group data-error-msg="Pick the closest one — you can always change your mind.">
+        {
+          [
+            ['asap', 'As soon as possible', 'We can close in as little as 7 days'],
+            ['1-3-months', 'In the next 1–3 months', "We'll work around your dates"],
+            ['exploring', 'Just exploring my options', 'Smart — get the number first'],
+          ].map(([val, label, hint]) => (
+            <label class="chip-option">
+              <span>
+                <span class="block">{label}</span>
+                <span class="block text-sm font-normal text-stone-500">{hint}</span>
+              </span>
+              <input type="radio" name="timeline" value={val} class="h-5 w-5 accent-pine-700" />
+            </label>
+          ))
+        }
+      </div>
+      <p class="field-error" role="alert"></p>
+      <div class="mt-4 flex gap-3">
+        <button type="button" class="btn-secondary" data-back>← Back</button>
+        <button type="button" class="btn-primary flex-1" data-next>Next →</button>
+      </div>
+    </fieldset>
+
+    <!-- STEP 4: contact + consent -->
+    <fieldset data-step="4" hidden>
+      <legend class="field-label !text-base">Where should we send your offer?</legend>
+      <div class="space-y-4">
+        <div>
+          <label class="field-label" for={`${id}-name`}>Your name</label>
+          <input class="field-input" type="text" id={`${id}-name`} name="name" autocomplete="name" required data-error-msg="Please tell us your name." />
+          <p class="field-error" role="alert"></p>
+        </div>
+        <div>
+          <label class="field-label" for={`${id}-phone`}>Phone number</label>
+          <input
+            class="field-input"
+            type="tel"
+            id={`${id}-phone`}
+            name="phone"
+            autocomplete="tel"
+            inputmode="tel"
+            placeholder="(614) 555-0123"
+            required
+            data-phone-mask
+            data-error-msg="Please enter a 10-digit phone number so we can deliver your offer."
+          />
+          <p class="field-error" role="alert"></p>
+        </div>
+        <div>
+          <label class="field-label" for={`${id}-email`}>Email</label>
+          <input class="field-input" type="email" id={`${id}-email`} name="email" autocomplete="email" required data-error-msg="Please enter a valid email address." />
+          <p class="field-error" role="alert"></p>
+        </div>
+
+        <!-- TCPA consent. Two-checkbox pattern carried over from the current
+             site. [HAVE ATTORNEY REVIEW] before launch — see LAUNCH-CHECKLIST. -->
+        <div class="space-y-3 rounded-xl bg-stone-warm p-4 text-xs leading-relaxed text-stone-600">
+          <label class="flex cursor-pointer gap-2.5">
+            <input type="checkbox" name="consent_transactional" value="yes" required class="mt-0.5 h-5 w-5 shrink-0 accent-pine-700" data-error-msg="Please check this box so we're allowed to contact you about your offer." />
+            <span>
+              I agree to receive calls, texts, and emails from {SITE.legalName} d/b/a Sell to Sean
+              about my property inquiry, such as my offer, questions, and appointment details.
+              Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out.
+              See our <a href="/terms/" class="underline">Terms</a> and
+              <a href="/privacy/" class="underline">Privacy Policy</a>. <strong>(Required)</strong>
+            </span>
+          </label>
+          <label class="flex cursor-pointer gap-2.5">
+            <input type="checkbox" name="consent_marketing" value="yes" class="mt-0.5 h-5 w-5 shrink-0 accent-pine-700" />
+            <span>
+              I also agree to receive occasional marketing calls, texts, and emails, such as offers
+              and real-estate updates. Not required to sell your house. Consent is not a condition
+              of purchase. Reply STOP to opt out. <strong>(Optional)</strong>
+            </span>
+          </label>
+          <p class="field-error" role="alert"></p>
+        </div>
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button type="button" class="btn-secondary" data-back>← Back</button>
+        <button type="submit" class="btn-primary flex-1">Send Me My Offer</button>
+      </div>
+      <p class="mt-3 text-center text-xs text-stone-500">
+        🔒 Your info goes to Sean's team only — never sold to other investors.
+      </p>
+    </fieldset>
+
+    <!-- Ad attribution (filled from sessionStorage by script below) -->
+    {['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','campaignid','uid','landing_page'].map((k) => (
+      <input type="hidden" name={k} />
+    ))}
+    <!-- Honeypot: bots fill it, humans never see it -->
+    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+  </form>
+
+  <p class="mt-5 border-t border-stone-100 pt-4 text-center text-sm text-stone-600">
+    Rather talk to a person? Call Sean's team:
+    <a href={SITE.phoneHref} class="font-bold text-pine-800 underline" data-track="phone_click" data-loc="lead_form">{SITE.phone}</a>
+  </p>
+</section>
+
+<script>
+  function initLeadForm(form: HTMLFormElement) {
+    const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-step]'));
+    const progress = form.querySelector<HTMLElement>('[data-progress]')!;
+    const progressbar = form.querySelector<HTMLElement>('[role="progressbar"]')!;
+    const stepLabel = form.querySelector<HTMLElement>('[data-step-label]')!;
+    const stepCount = form.querySelector<HTMLElement>('[data-step-count]')!;
+    const labels = ['Your property', 'Condition', 'Timeline', 'Your offer delivery'];
+    let current = 0;
+    let started = false;
+
+    const dl = (event: string, extra: Record<string, unknown> = {}) =>
+      (window as any).dataLayer.push({ event, form_location: location.pathname, ...extra });
+
+    // Prefill address from hero handoff (?address=...)
+    const params = new URLSearchParams(location.search);
+    const addr = form.querySelector<HTMLInputElement>('[name="street_address"]');
+    if (params.get('address') && addr) addr.value = params.get('address')!;
+
+    // Fill attribution hidden fields
+    try {
+      const attr = JSON.parse(sessionStorage.getItem('sts_attribution') || '{}');
+      Object.entries(attr).forEach(([k, v]) => {
+        const input = form.querySelector<HTMLInputElement>(`input[type="hidden"][name="${k}"]`);
+        if (input) input.value = String(v);
+      });
+    } catch (e) {}
+
+    function show(i: number) {
+      steps.forEach((s, idx) => (s.hidden = idx !== i));
+      current = i;
+      const pct = ((i + 1) / steps.length) * 100;
+      progress.style.width = pct + '%';
+      progressbar.setAttribute('aria-valuenow', String(pct));
+      stepLabel.textContent = `Step ${i + 1} of ${steps.length} — ${labels[i]}`;
+      stepCount.textContent = Math.round(pct) + '%';
+      const first = steps[i].querySelector<HTMLElement>('input:not([type=hidden]), button');
+      first?.focus({ preventScroll: true });
+    }
+
+    function setError(field: Element, msg: string) {
+      const err = (field.closest('div, fieldset') as HTMLElement).querySelector('.field-error');
+      if (err) { err.textContent = msg; err.classList.add('is-visible'); }
+      if (field instanceof HTMLInputElement) field.setAttribute('aria-invalid', 'true');
+    }
+    function clearErrors(scope: HTMLElement) {
+      scope.querySelectorAll('.field-error').forEach((e) => { e.textContent = ''; e.classList.remove('is-visible'); });
+      scope.querySelectorAll('[aria-invalid]').forEach((e) => e.removeAttribute('aria-invalid'));
+    }
+
+    function validateStep(step: HTMLFieldSetElement): boolean {
+      clearErrors(step);
+      let ok = true;
+      // Required radio groups (condition / timeline chips)
+      step.querySelectorAll<HTMLElement>('[data-required-group]').forEach((group) => {
+        if (!group.querySelector('input:checked')) {
+          ok = false;
+          const err = step.querySelector('.field-error');
+          if (err) { err.textContent = group.dataset.errorMsg || 'Please choose an option.'; err.classList.add('is-visible'); }
+        }
+      });
+      // Required inputs
+      step.querySelectorAll<HTMLInputElement>('input[required]').forEach((input) => {
+        let valid = input.value.trim().length > 1;
+        if (input.type === 'email') valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value.trim());
+        if (input.type === 'tel') valid = input.value.replace(/\D/g, '').length === 10;
+        if (input.type === 'checkbox') valid = input.checked;
+        if (!valid) { ok = false; setError(input, input.dataset.errorMsg || 'This field is required.'); }
+      });
+      return ok;
+    }
+
+    form.addEventListener('input', () => {
+      if (!started) { started = true; dl('form_start'); }
+    }, { once: false });
+
+    form.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      if (t.closest('[data-next]')) {
+        if (validateStep(steps[current])) {
+          show(current + 1);
+          dl(`form_step_${current + 1}`);
+        }
+      } else if (t.closest('[data-back]')) {
+        show(current - 1);
+      }
+    });
+
+    // Phone mask: (XXX) XXX-XXXX
+    form.querySelectorAll<HTMLInputElement>('[data-phone-mask]').forEach((input) => {
+      input.addEventListener('input', () => {
+        const d = input.value.replace(/\D/g, '').slice(0, 10);
+        let out = d;
+        if (d.length > 6) out = `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+        else if (d.length > 3) out = `(${d.slice(0, 3)}) ${d.slice(3)}`;
+        else if (d.length > 0) out = `(${d}`;
+        input.value = out;
+      });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validateStep(steps[current])) return;
+      if ((form.querySelector('[name="website"]') as HTMLInputElement)?.value) return; // bot
+
+      const submitBtn = form.querySelector<HTMLButtonElement>('[type="submit"]')!;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      const payload: Record<string, string> = { submitted_at: new Date().toISOString(), source_page: location.pathname };
+      new FormData(form).forEach((v, k) => { if (k !== 'website') payload[k] = String(v); });
+
+      dl('form_submit', { timeline: payload.timeline, condition: payload.condition });
+
+      const webhook = form.dataset.webhook;
+      try {
+        if (webhook) {
+          const res = await fetch(webhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error('Webhook responded ' + res.status);
+        } else {
+          console.info('[Sell to Sean] No PUBLIC_LEAD_WEBHOOK_URL configured. Lead payload:', payload);
+        }
+        location.assign('/thank-you/');
+      } catch (err) {
+        // Never lose a lead to a tech failure: show the phone number.
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Me My Offer';
+        const errEl = steps[current].querySelector('.field-error');
+        if (errEl) {
+          errEl.textContent = 'Something went wrong sending your info. Please call us instead — (614) 412-1601 — or try again.';
+          errEl.classList.add('is-visible');
+        }
+      }
+    });
+  }
+
+  document.querySelectorAll<HTMLFormElement>('[data-lead-form]').forEach(initLeadForm);
+</script>

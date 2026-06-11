@@ -1,0 +1,32 @@
+---
+/**
+ * Address-only hero form (Express Homebuyers pattern). GETs to /get-offer/
+ * where the multi-step form picks up with the address prefilled — the visitor
+ * has already micro-committed by typing their address.
+ */
+---
+
+<form action="/get-offer/" method="get" class="flex flex-col gap-2.5 sm:flex-row" data-hero-form>
+  <label class="sr-only" for="hero-address">Property street address</label>
+  <input
+    id="hero-address"
+    class="field-input flex-1 shadow-md"
+    type="text"
+    name="address"
+    autocomplete="street-address"
+    placeholder="Enter your property address"
+    required
+  />
+  <button type="submit" class="btn-primary shadow-lg sm:px-7">Get My Cash Offer</button>
+</form>
+<p class="mt-2.5 text-sm text-stone-600">
+  Takes about 2 minutes · No fees · No obligation · Your info stays private
+</p>
+
+<script>
+  document.querySelectorAll('[data-hero-form]').forEach((form) => {
+    form.addEventListener('submit', () => {
+      (window as any).dataLayer.push({ event: 'form_start', form_location: location.pathname, variant: 'hero_address' });
+    });
+  });
+</script>

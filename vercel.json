@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/about-us", "destination": "/about/", "permanent": true },
+    { "source": "/about-us/", "destination": "/about/", "permanent": true },
+    { "source": "/frequently-asked-questions", "destination": "/faq/", "permanent": true },
+    { "source": "/frequently-asked-questions/", "destination": "/faq/", "permanent": true },
+    { "source": "/review", "destination": "/reviews/", "permanent": true },
+    { "source": "/review/", "destination": "/reviews/", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact/", "permanent": true },
+    { "source": "/contact-us/", "destination": "/contact/", "permanent": true },
+    { "source": "/terms-of-use", "destination": "/terms/", "permanent": true },
+    { "source": "/terms-of-use/", "destination": "/terms/", "permanent": true }
+  ]
+}

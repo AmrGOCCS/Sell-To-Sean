@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site.js';
+---
+
+<BaseLayout
+  title="Page Not Found | Sell to Sean"
+  description="That page doesn't exist — but your cash offer does. Find what you were looking for."
+  noindex={true}
+>
+  <section class="py-16 sm:py-24">
+    <div class="container-site max-w-2xl text-center">
+      <p class="font-display text-7xl font-bold text-pine-200" aria-hidden="true">404</p>
+      <h1 class="mt-4" style="font-size: var(--text-h2)">This page moved out. Your offer didn't.</h1>
+      <p class="mt-4 text-lg text-stone-700">
+        The page you're looking for isn't here — we recently rebuilt the site. Here's where
+        everything lives now:
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/get-offer/" class="btn-primary">{SITE.cta}</a>
+        <a href="/" class="btn-secondary">Go to homepage</a>
+      </div>
+      <ul class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold">
+        <li><a href="/how-it-works/" class="text-pine-700 underline">How It Works</a></li>
+        <li><a href="/about/" class="text-pine-700 underline">About Sean</a></li>
+        <li><a href="/reviews/" class="text-pine-700 underline">Reviews</a></li>
+        <li><a href="/faq/" class="text-pine-700 underline">FAQ</a></li>
+        <li><a href="/contact/" class="text-pine-700 underline">Contact</a></li>
+      </ul>
+      <p class="mt-8 text-stone-600">
+        Or just call us: <a href={SITE.phoneHref} class="font-bold text-pine-800 underline" data-track="phone_click" data-loc="404">{SITE.phone}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

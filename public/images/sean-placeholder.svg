@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="560" viewBox="0 0 480 560" role="img" aria-label="Placeholder for a photo of Sean Grabow">
+  <rect width="480" height="560" rx="16" fill="#e7e0d2"/>
+  <circle cx="240" cy="210" r="80" fill="#c9bfa8"/>
+  <path d="M110 480c10-90 62-140 130-140s120 50 130 140Z" fill="#c9bfa8"/>
+  <text x="240" y="510" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold" fill="#7a705c">[PHOTO OF SEAN]</text>
+  <text x="240" y="538" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#7a705c">Replace with real photo — see README</text>
+</svg>

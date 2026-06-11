@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroForm from '../components/HeroForm.astro';
+import HowItWorksSteps from '../components/HowItWorksSteps.astro';
+import OfferMath from '../components/OfferMath.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import TestimonialCards from '../components/TestimonialCards.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site.js';
+import { FEATURED_REVIEWS } from '../data/reviews.js';
+import { faqsFor } from '../data/faqs.js';
+import { SITUATIONS } from '../data/situations.js';
+import { CITIES } from '../data/cities.js';
+
+const title = 'Sell Your House Fast in Columbus, OH — Cash Offer in 24 Hours | Sell to Sean';
+const description =
+  'Get a fair, written cash offer on your Columbus house in 24 hours. No fees, no repairs, no obligation. Local buyer since 2018 — close in as little as 7 days.';
+const homeFaqs = faqsFor('home').slice(0, 6);
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- HERO -->
+  <section class="border-b border-stone-200 bg-gradient-to-b from-stone-warm to-cream">
+    <div class="container-site grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
+      <div>
+        <span class="eyebrow">{SITE.tagline}</span>
+        <h1 style="font-size: var(--text-display)" class="leading-[1.1]">
+          Get a fair cash offer on your Columbus house in 24 hours.
+        </h1>
+        <p class="mt-4 max-w-xl text-lg leading-relaxed text-stone-700">
+          No fees. No repairs. No obligation. Sell as-is and close in as little as 7 days — on
+          your timeline, with a local buyer you can actually meet.
+        </p>
+        <div class="mt-7 max-w-xl">
+          <HeroForm />
+        </div>
+        <ul class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-stone-600">
+          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-pine-600">✓</span> {SITE.bbb} <span class="text-xs font-normal text-stone-400">[verify]</span></li>
+          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-pine-600">✓</span> Locally owned &amp; operated</li>
+          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-pine-600">✓</span> Buying in Columbus since {SITE.founded}</li>
+        </ul>
+      </div>
+
+      <figure class="mx-auto w-full max-w-sm lg:max-w-none">
+        <!-- LCP element: lightweight SVG placeholder, explicit dimensions, no CLS.
+             Replace with a real, warm photo of Sean (see README §Images). -->
+        <img
+          src="/images/sean-placeholder.svg"
+          alt="[PHOTO OF SEAN GRABOW — replace with a real, friendly photo of Sean in front of a Columbus house]"
+          width="480"
+          height="560"
+          fetchpriority="high"
+          class="w-full rounded-2xl border border-stone-200 shadow-lg"
+        />
+        <figcaption class="mt-3 text-center text-sm text-stone-600">
+          <strong class="text-pine-900">Sean Grabow</strong> — Columbus native, founder of Sell to Sean
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ANY SITUATION -->
+  <section class="py-14 sm:py-20" aria-labelledby="situations-heading">
+    <div class="container-site">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Any condition, any situation</span>
+        <h2 id="situations-heading" style="font-size: var(--text-h2)">Whatever brought you here, we've helped someone through it.</h2>
+        <p class="mt-3 leading-relaxed text-stone-700">
+          Most people don't sell to a cash buyer because everything is going great. Behind on
+          payments, a house you inherited, tenants you're done with — there's a page for your
+          situation, with straight answers and a story from someone who's been there.
+        </p>
+      </div>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {
+          SITUATIONS.map((s) => (
+            <a href={`/we-buy-houses/${s.slug}/`} class="card group transition hover:border-pine-400 hover:shadow-md">
+              <h3 class="text-lg group-hover:text-pine-800">{s.h1}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-stone-600">{s.metaDescription}</p>
+              <span class="mt-3 inline-block font-semibold text-pine-700">Read more →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="bg-stone-warm py-14 sm:py-20" aria-labelledby="hiw-heading">
+    <div class="container-site">
+      <div class="mb-8 max-w-2xl">
+        <span class="eyebrow">Sell in three easy steps</span>
+        <h2 id="hiw-heading" style="font-size: var(--text-h2)">From "what's it worth?" to money in your account.</h2>
+      </div>
+      <HowItWorksSteps />
+      <p class="mt-8">
+        <a href="/how-it-works/" class="font-semibold text-pine-700 underline">See the whole process, step by step →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- OFFER MATH -->
+  <section class="py-14 sm:py-20" aria-labelledby="math-heading">
+    <div class="container-site">
+      <OfferMath />
+    </div>
+  </section>
+
+  <!-- SEAN STORY -->
+  <section class="bg-pine-50 py-14 sm:py-20" aria-labelledby="sean-heading">
+    <div class="container-site grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <img
+        src="/images/sean-placeholder.svg"
+        alt="[PHOTO OF SEAN — replace with a candid photo of Sean talking with a homeowner]"
+        width="480"
+        height="560"
+        loading="lazy"
+        class="mx-auto w-full max-w-xs rounded-2xl border border-stone-200 shadow-md lg:max-w-sm"
+      />
+      <div>
+        <span class="eyebrow">A person, not a postcard</span>
+        <h2 id="sean-heading" style="font-size: var(--text-h2)">You're not selling to a call center. You're selling to Sean.</h2>
+        <p class="mt-4 leading-relaxed text-stone-700">
+          Sean Grabow is a Columbus native who started this company in {SITE.founded} after going
+          through a stressful home sale of his own. The big national buyers are a phone tree.
+          Sean is a guy with an office on East Rich Street who answers his phone, explains every
+          number, and moves at your pace — that's been the whole playbook since day one.
+        </p>
+        <p class="mt-4 leading-relaxed text-stone-700">
+          His rules for the team: listen first, explain everything clearly, and never push.
+          Read the reviews — Columbus sellers mention Sean, Liam, Noah, and Marie by name,
+          because they actually met them.
+        </p>
+        <a href="/about/" class="btn-secondary mt-6">Meet Sean &amp; the team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="py-14 sm:py-20" aria-labelledby="reviews-heading">
+    <div class="container-site">
+      <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div class="max-w-2xl">
+          <span class="eyebrow">Real Columbus sellers</span>
+          <h2 id="reviews-heading" style="font-size: var(--text-h2)">Don't take our word for it.</h2>
+        </div>
+        <a href="/reviews/" class="font-semibold text-pine-700 underline">Read all the reviews →</a>
+      </div>
+      <TestimonialCards reviews={FEATURED_REVIEWS.slice(0, 6)} />
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="bg-stone-warm py-14 sm:py-20" aria-labelledby="compare-heading">
+    <div class="container-site">
+      <div class="mb-8 max-w-2xl">
+        <span class="eyebrow">The honest comparison</span>
+        <h2 id="compare-heading" style="font-size: var(--text-h2)">Selling to Sean vs. listing with an agent</h2>
+        <p class="mt-3 leading-relaxed text-stone-700">
+          A cash sale isn't right for everyone — and we'll tell you if it's not right for you.
+          Here's the real tradeoff, including the row most buyers hide.
+        </p>
+      </div>
+      <ComparisonTable />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-14 sm:py-20" aria-labelledby="faq-heading">
+    <div class="container-site">
+      <div class="mb-8 text-center">
+        <span class="eyebrow">Questions everyone asks</span>
+        <h2 id="faq-heading" style="font-size: var(--text-h2)">Asked and answered.</h2>
+      </div>
+      <FAQAccordion faqs={homeFaqs} />
+      <p class="mt-6 text-center">
+        <a href="/faq/" class="font-semibold text-pine-700 underline">See every question we get →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICE AREA / internal links -->
+  <section class="border-t border-stone-200 py-10" aria-labelledby="area-heading">
+    <div class="container-site">
+      <h2 id="area-heading" class="text-lg">Where we buy houses</h2>
+      <p class="mt-2 text-sm leading-relaxed text-stone-600">
+        Sell to Sean buys houses across Columbus and Central Ohio, including
+        {CITIES.map((c, i) => (
+          <Fragment>
+            <a href={`/sell-my-house-fast/${c.slug}/`} class="font-semibold text-pine-700 underline">{c.name}</a>{i < CITIES.length - 1 ? ', ' : ''}
+          </Fragment>
+        ))}
+        and the surrounding communities. Don't see your town? We probably still buy there —
+        <a href="/contact/" class="font-semibold text-pine-700 underline">ask us</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTASection formId="home-cta-form" />
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site.js';
+import { FAQS } from '../data/faqs.js';
+import { faqSchema, breadcrumbSchema } from '../lib/schema.js';
+
+const title = 'FAQ — Honest Answers About Selling Your House for Cash | Sell to Sean';
+const description =
+  'Every question Columbus sellers ask us: fees (none), how the offer is calculated, scams, tenants, cleanouts, timelines — answered plainly, including when NOT to sell to us.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemas={[faqSchema(FAQS), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq/' }])]}
+>
+  <section class="bg-stone-warm py-12 sm:py-16">
+    <div class="container-site max-w-3xl">
+      <span class="eyebrow">No question is too blunt</span>
+      <h1 style="font-size: var(--text-display)">Frequently asked questions</h1>
+      <p class="mt-4 text-lg leading-relaxed text-stone-700">
+        These are the real questions Columbus sellers ask us — including "is this a scam?" and
+        "would an agent get me more?" If your question isn't here, call
+        <a href={SITE.phoneHref} class="font-semibold text-pine-700 underline" data-track="phone_click" data-loc="faq_intro">{SITE.phone}</a>
+        and ask a person.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20" aria-label="All questions">
+    <div class="container-site">
+      <FAQAccordion faqs={FAQS} />
+    </div>
+  </section>
+
+  <CTASection formId="faq-cta-form" heading="Last question: what's your house worth in cash?" />
+</BaseLayout>

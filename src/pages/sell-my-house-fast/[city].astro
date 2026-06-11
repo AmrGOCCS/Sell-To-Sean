@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroForm from '../../components/HeroForm.astro';
+import HowItWorksSteps from '../../components/HowItWorksSteps.astro';
+import TestimonialCards from '../../components/TestimonialCards.astro';
+import CTASection from '../../components/CTASection.astro';
+import { SITE } from '../../data/site.js';
+import { CITIES } from '../../data/cities.js';
+import { SITUATIONS } from '../../data/situations.js';
+import { FEATURED_REVIEWS } from '../../data/reviews.js';
+import { breadcrumbSchema } from '../../lib/schema.js';
+
+export function getStaticPaths() {
+  return CITIES.map((city) => ({ params: { city: city.slug }, props: { city } }));
+}
+
+const { city } = Astro.props;
+const title = `Sell My House Fast in ${city.name}, OH — Cash Offer in 24 Hours | Sell to Sean`;
+const description = `Sell your ${city.name} house as-is for cash. Local Columbus buyer since 2018 — written offer in 24 hours, no fees, no repairs, close in as little as 7 days.`;
+const linkedSituations = SITUATIONS.filter((s) => city.situationLinks.includes(s.slug));
+const otherCities = CITIES.filter((c) => c.slug !== city.slug);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemas={[
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: `Sell My House Fast in ${city.name}`, path: `/sell-my-house-fast/${city.slug}/` },
+    ]),
+  ]}
+>
+  <section class="border-b border-stone-200 bg-gradient-to-b from-stone-warm to-cream py-12 sm:py-16">
+    <div class="container-site max-w-3xl">
+      <nav aria-label="Breadcrumb" class="mb-4 text-sm text-stone-500">
+        <a href="/" class="underline hover:text-pine-700">Home</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Sell My House Fast in {city.name}</span>
+      </nav>
+      <h1 style="font-size: var(--text-display)">Sell your house fast in {city.name}, Ohio</h1>
+      <p class="mt-4 text-lg leading-relaxed text-stone-700">
+        Get a fair, written cash offer on your {city.name} house in 24 hours — no fees, no
+        repairs, no obligation. Sell to Sean is a local buyer based in Columbus, buying across
+        {city.county} since {SITE.founded}.
+      </p>
+      <div class="mt-7 max-w-xl"><HeroForm /></div>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20">
+    <div class="prose-site container-site max-w-3xl">
+      <h2>Why {city.name} homeowners sell to Sean</h2>
+      <p>{city.intro}</p>
+      <ul>
+        {city.localNotes.map((note) => <li>{note}</li>)}
+      </ul>
+      <p>
+        We also buy in nearby {city.nearby.join(', ')} — and we close at a licensed Ohio title
+        company, the same neutral third party that handles any normal home sale. Read
+        <a href="/how-it-works/">how the process works</a> and
+        <a href="/how-it-works/#math-heading">exactly how we calculate your offer</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-stone-warm py-14 sm:py-20" aria-label="How it works">
+    <div class="container-site">
+      <h2 class="mb-8" style="font-size: var(--text-h2)">Selling a {city.name} house in three steps</h2>
+      <HowItWorksSteps />
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20" aria-label="Common situations">
+    <div class="container-site">
+      <h2 style="font-size: var(--text-h2)">Common situations we help with in {city.name}</h2>
+      <div class="mt-7 grid gap-5 md:grid-cols-2">
+        {
+          linkedSituations.map((s) => (
+            <a href={`/we-buy-houses/${s.slug}/`} class="card group transition hover:border-pine-400 hover:shadow-md">
+              <h3 class="text-lg group-hover:text-pine-800">{s.h1}</h3>
+              <span class="mt-2 inline-block font-semibold text-pine-700">Straight answers →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-stone-warm py-14 sm:py-20" aria-label="Reviews">
+    <div class="container-site">
+      <h2 class="mb-8" style="font-size: var(--text-h2)">Columbus-area sellers on working with Sean</h2>
+      <TestimonialCards reviews={FEATURED_REVIEWS.slice(0, 3)} />
+      <p class="mt-6"><a href="/reviews/" class="font-semibold text-pine-700 underline">Read all reviews →</a></p>
+    </div>
+  </section>
+
+  <section class="border-t border-stone-200 py-8" aria-label="Other service areas">
+    <div class="container-site text-sm text-stone-600">
+      Also buying in:
+      {otherCities.map((c, i) => (
+        <Fragment>
+          <a href={`/sell-my-house-fast/${c.slug}/`} class="font-semibold text-pine-700 underline">{c.name}</a>{i < otherCities.length - 1 ? ' · ' : ''}
+        </Fragment>
+      ))}
+      · <a href="/" class="font-semibold text-pine-700 underline">Columbus</a>
+    </div>
+  </section>
+
+  <CTASection formId={`city-${city.slug}-form`} heading={`What's your ${city.name} house worth in cash?`} />
+</BaseLayout>

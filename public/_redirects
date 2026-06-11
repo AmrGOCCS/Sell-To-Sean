@@ -1,0 +1,11 @@
+# Netlify redirects — old WordPress URLs → new structure (301)
+/about-us/                  /about/        301
+/about-us                   /about/        301
+/frequently-asked-questions/ /faq/         301
+/frequently-asked-questions  /faq/         301
+/review/                    /reviews/      301
+/review                     /reviews/      301
+/contact-us/                /contact/      301
+/contact-us                 /contact/      301
+/terms-of-use/              /terms/        301
+/terms-of-use               /terms/        301

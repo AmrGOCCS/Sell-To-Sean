@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site.js';
+
+const title = 'Terms of Use | Sell to Sean';
+const description = 'Terms of use for selltosean.com, including communication consent terms.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="py-12 sm:py-16">
+    <div class="prose-site container-site max-w-3xl">
+      <h1 style="font-size: var(--text-h2)">Terms of Use</h1>
+      <p><em>Last updated: [DATE — set at launch]. <strong>[HAVE ATTORNEY REVIEW THIS ENTIRE PAGE BEFORE LAUNCH.]</strong></em></p>
+
+      <p>
+        These terms govern your use of selltosean.com, operated by {SITE.legalName}, doing
+        business as Sell to Sean. By using this site, you agree to them.
+      </p>
+
+      <h2>What this website is</h2>
+      <p>
+        This site lets homeowners request a cash offer for their property. Submitting a request
+        is free and does not obligate you to sell, and it does not obligate us to buy. Any
+        purchase happens only through a separate written purchase agreement signed by both
+        sides.
+      </p>
+
+      <h2>Not professional advice</h2>
+      <p>
+        Content on this site is general information, not legal, tax, or financial advice.
+        Situations like foreclosure and probate have legal deadlines and consequences — please
+        talk to a qualified attorney, housing counselor, or tax professional about your
+        specific circumstances.
+      </p>
+
+      <h2>Communication consent (calls, texts, email)</h2>
+      <p>
+        When you submit a form and check the consent box, you authorize {SITE.legalName} d/b/a
+        Sell to Sean to contact you by phone call, text message (SMS), and email about your
+        property inquiry — including offers, questions, and appointment details — using the
+        contact information you provided, including via automated technology. Message frequency
+        varies. Message and data rates may apply. You can opt out of texts at any time by
+        replying <strong>STOP</strong>, get help by replying <strong>HELP</strong>, and opt out
+        of all contact by calling {SITE.phone}.
+      </p>
+      <p>
+        Marketing communications are sent only if you check the separate optional marketing
+        consent box. <strong>Consent to marketing is not a condition of receiving an offer or
+        selling your property to us.</strong>
+      </p>
+
+      <h2>Accuracy of information</h2>
+      <p>
+        You agree that the information you submit about a property is accurate to your knowledge
+        and that you have the right to inquire about selling it.
+      </p>
+
+      <h2>Intellectual property</h2>
+      <p>
+        The content on this site — text, design, photos, and reviews — belongs to
+        {SITE.legalName} or its licensors. Don't reuse it without permission.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>
+        The site is provided "as is." To the fullest extent the law allows, {SITE.legalName} is
+        not liable for damages arising from your use of the site itself. Nothing here limits
+        rights you have under a signed purchase agreement or applicable law.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of the State of Ohio.</p>
+
+      <h2>Contact</h2>
+      <p>
+        {SITE.legalName} d/b/a Sell to Sean · {SITE.address.street}, {SITE.address.city},
+        {SITE.address.state} {SITE.address.zip} · {SITE.phone}
+      </p>
+    </div>
+  </section>
+</BaseLayout>

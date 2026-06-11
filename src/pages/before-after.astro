@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
+import { breadcrumbSchema } from '../lib/schema.js';
+
+const title = 'Before & After — Columbus Houses We Bought and Restored | Sell to Sean';
+const description =
+  'See real Columbus houses Sean bought as-is and renovated — proof that no condition is too rough. Sell your house exactly as it sits; we handle the rest.';
+
+// [REAL PROJECT PHOTOS NEEDED] — the live site has 4 projects with paired
+// before/after images. Export those originals and replace the placeholders.
+const projects = [1, 2, 3, 4];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Before & After', path: '/before-after/' }])]}
+>
+  <section class="bg-stone-warm py-12 sm:py-16">
+    <div class="container-site max-w-3xl">
+      <span class="eyebrow">From problem properties to beautiful homes</span>
+      <h1 style="font-size: var(--text-display)">The houses other buyers run from? We buy them.</h1>
+      <p class="mt-4 text-lg leading-relaxed text-stone-700">
+        Many of the houses Sean buys need serious work — roofs, systems, everything. These
+        projects show what happens after closing: local crews turn neglected houses into clean,
+        comfortable homes, and the neighborhood gets a little better. For you, it means one
+        thing: <strong>no condition is too rough to get an offer.</strong>
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20" aria-label="Renovation projects">
+    <div class="container-site grid gap-8 md:grid-cols-2">
+      {
+        projects.map((n) => (
+          <figure class="card">
+            <div class="grid grid-cols-2 gap-3">
+              <img src="/images/project-before-placeholder.svg" alt={`[BEFORE PHOTO — project ${n} from the current site]`} width="360" height="270" loading="lazy" class="w-full rounded-xl" />
+              <img src="/images/project-after-placeholder.svg" alt={`[AFTER PHOTO — project ${n} from the current site]`} width="360" height="270" loading="lazy" class="w-full rounded-xl" />
+            </div>
+            <figcaption class="mt-3 text-sm text-stone-600">
+              <strong class="text-pine-900">Project {n} — Columbus, OH</strong>
+              [ONE-LINE REAL DESCRIPTION — e.g. what condition it was bought in and what was done. No invented details.]
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+
+  <CTASection formId="ba-cta-form" heading="Your house could be the next 'before.'" sub="Roof caving in? Forty years of stuff inside? Doesn't matter. Get a written cash offer exactly as it sits." />
+</BaseLayout>

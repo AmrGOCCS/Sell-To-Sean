@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="270" viewBox="0 0 360 270" role="img" aria-label="Placeholder for an after-renovation photo">
+  <rect width="360" height="270" rx="12" fill="#d8efe2"/>
+  <path d="M70 170 180 80l110 90v80H70Z" fill="#82c7a8"/>
+  <text x="180" y="240" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#1b5a44">[AFTER PHOTO]</text>
+</svg>

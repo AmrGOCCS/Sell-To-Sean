@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HowItWorksSteps from '../components/HowItWorksSteps.astro';
+import OfferMath from '../components/OfferMath.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site.js';
+import { breadcrumbSchema } from '../lib/schema.js';
+
+const title = 'How It Works — Sell Your Columbus House for Cash in 3 Steps | Sell to Sean';
+const description =
+  'Address → written cash offer in 24 hours → close at a licensed Ohio title company on your date. See exactly how we calculate your offer. No fees, ever.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'How It Works', path: '/how-it-works/' }])]}
+>
+  <section class="bg-stone-warm py-12 sm:py-16">
+    <div class="container-site max-w-3xl">
+      <span class="eyebrow">The whole process, no surprises</span>
+      <h1 style="font-size: var(--text-display)">How selling your house to Sean works</h1>
+      <p class="mt-4 text-lg leading-relaxed text-stone-700">
+        Here is the entire process, start to finish — including the part most cash buyers won't
+        show you: how the offer number is built. The short version: you give us an address, we
+        give you a written number, and everything after that is your decision.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20" aria-label="The three steps">
+    <div class="container-site">
+      <HowItWorksSteps />
+
+      <div class="prose-site mx-auto mt-14 max-w-3xl">
+        <h2>What happens right after you submit</h2>
+        <p>
+          Your information goes straight to Sean's team — not to a list that gets sold to ten
+          investors. Within {SITE.callbackPromise}, a real person calls you. The first call is a
+          conversation, not a pitch: what's the house like, what's your situation, what timing
+          works for you. If a cash sale isn't your best option, we'll say so on that call.
+        </p>
+        <h2>The walkthrough</h2>
+        <p>
+          One visit, usually under an hour. We're checking the big stuff — roof, systems,
+          structure — so we can price repairs accurately. You don't need to clean up, and you
+          can't fail this inspection: condition changes the math, never the respect you get.
+          Out of state? Photos or a video walkthrough work fine.
+        </p>
+        <h2>Your written offer</h2>
+        <p>
+          You get a real number in writing, usually within 24 hours of the walkthrough, and we'll
+          walk you through exactly how we got there. The offer is free, and it doesn't expire the
+          moment we hang up. Take it to your family, your attorney, even a real estate agent —
+          we encourage it.
+        </p>
+        <h2>Closing day</h2>
+        <p>
+          Every closing happens at a licensed Ohio title company — a neutral third party that
+          checks the title, handles the paperwork, pays off anything owed on the house, and wires
+          you the rest. You never sign your deed over to us directly. Pick a date 7 days out or
+          7 months out; we'll be there either way.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-stone-warm py-14 sm:py-20" aria-label="How the offer is calculated">
+    <div class="container-site"><OfferMath /></div>
+  </section>
+
+  <section class="py-14 sm:py-20" aria-label="Comparison with listing">
+    <div class="container-site">
+      <h2 class="mb-8" style="font-size: var(--text-h2)">Is this better than listing? Sometimes. Here's the honest answer.</h2>
+      <ComparisonTable />
+    </div>
+  </section>
+
+  <CTASection formId="hiw-cta-form" heading="Ready for your number?" />
+</BaseLayout>

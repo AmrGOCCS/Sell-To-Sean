@@ -1,0 +1,33 @@
+---
+import { SITE } from '../data/site.js';
+import LeadForm from './LeadForm.astro';
+
+interface Props {
+  heading?: string;
+  sub?: string;
+  formId?: string;
+}
+const {
+  heading = 'See your number. Then decide.',
+  sub = "A written cash offer costs nothing and commits you to nothing. Worst case, you'll know exactly what your house is worth to a cash buyer.",
+  formId = 'cta-form',
+} = Astro.props;
+---
+
+<section class="bg-pine-950 py-14 sm:py-20" aria-labelledby="final-cta-heading">
+  <div class="container-site grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <h2 id="final-cta-heading" class="!text-white" style="font-size: var(--text-h2)">{heading}</h2>
+      <p class="mt-4 text-lg leading-relaxed text-pine-100">{sub}</p>
+      <ul class="mt-6 space-y-2.5 text-pine-100">
+        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-pine-300">✓</span> Written offer, usually within 24 hours</li>
+        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-pine-300">✓</span> No fees, no repairs, no cleanout</li>
+        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-pine-300">✓</span> Close in as little as 7 days — or on your date</li>
+      </ul>
+      <p class="mt-6 text-pine-100">
+        Prefer the phone? <a href={SITE.phoneHref} class="font-bold text-white underline" data-track="phone_click" data-loc="final_cta">{SITE.phone}</a>
+      </p>
+    </div>
+    <LeadForm id={formId} />
+  </div>
+</section>

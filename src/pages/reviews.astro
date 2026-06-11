@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TestimonialCards from '../components/TestimonialCards.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site.js';
+import { REVIEWS } from '../data/reviews.js';
+import { breadcrumbSchema } from '../lib/schema.js';
+
+const title = `Reviews — ${REVIEWS.length} Columbus Sellers on Working With Sean | Sell to Sean`;
+const description =
+  'Read real reviews from Columbus homeowners who sold their houses to Sean — foreclosure saves, inherited homes, tired landlords, and fast moves. Unedited and verbatim.';
+
+/*
+ * NOTE: No Review/AggregateRating JSON-LD here on purpose. Google treats
+ * review markup on the reviewed business's own site as self-serving and
+ * ignores it (or worse). The real rating lives on the Google Business
+ * Profile — link out to it instead. See SEO-CHECKLIST.md.
+ */
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Reviews', path: '/reviews/' }])]}
+>
+  <section class="bg-stone-warm py-12 sm:py-16">
+    <div class="container-site max-w-3xl">
+      <span class="eyebrow">{REVIEWS.length} real reviews, word for word</span>
+      <h1 style="font-size: var(--text-display)">What Columbus sellers say about Sell to Sean</h1>
+      <p class="mt-4 text-lg leading-relaxed text-stone-700">
+        Every review below is from a real seller, shown exactly as they wrote it — typos and all.
+        We didn't clean them up, because real beats polished. Want third-party proof? Read our
+        reviews on
+        <a href={SITE.social.googleMaps} rel="noopener" target="_blank" class="font-semibold text-pine-700 underline">Google</a>
+        and
+        <a href={SITE.social.yelp} rel="noopener" target="_blank" class="font-semibold text-pine-700 underline">Yelp</a>
+        where we can't touch them.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20" aria-label="All reviews">
+    <div class="container-site">
+      <TestimonialCards reviews={REVIEWS} />
+    </div>
+  </section>
+
+  <CTASection formId="reviews-cta-form" heading="Add your story to this page." sub="Every one of these sellers started the same way: an address and a phone call. No fees, no obligation — just a written number to consider." />
+</BaseLayout>

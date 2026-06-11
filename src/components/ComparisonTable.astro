@@ -1,0 +1,45 @@
+---
+/**
+ * Honest Sean-vs-agent comparison. The "6% plus other fees" and "90–120 days"
+ * figures are the claims used on the current live site. The honesty row
+ * ("might sell for more with an agent") is deliberate — it converts skeptics.
+ */
+const rows = [
+  ['Commissions & fees', 'None — $0', 'Typically ~6% plus other fees*'],
+  ['Repairs & cleanup', 'None — sell as-is, leave what you want', 'Usually needed before listing & after inspection'],
+  ['Showings & open houses', 'None — one walkthrough', 'Often dozens, on the buyer\'s schedule'],
+  ['Closing timeline', 'As little as 7 days — you pick the date', '90–120 days is common, start to finish*'],
+  ['Certainty', 'Cash — no financing to fall through', 'Deals can collapse if the buyer\'s loan fails'],
+  ['Privacy', 'No sign, no listing, no neighbors knowing', 'Public listing with photos of your home'],
+  ['Sale price', 'Below full market — that\'s the honest tradeoff', 'Often higher, if the home shows well'],
+];
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full min-w-[640px] border-separate border-spacing-0 overflow-hidden rounded-2xl border border-stone-200 bg-white text-left shadow-sm">
+    <caption class="sr-only">Comparison of selling to Sean versus listing with a real estate agent</caption>
+    <thead>
+      <tr class="text-sm">
+        <th scope="col" class="border-b border-stone-200 p-4 font-semibold text-stone-500"></th>
+        <th scope="col" class="border-b border-stone-200 bg-pine-800 p-4 font-display text-base text-white">Selling to Sean</th>
+        <th scope="col" class="border-b border-stone-200 p-4 font-display text-base text-stone-700">Listing with an agent</th>
+      </tr>
+    </thead>
+    <tbody class="text-sm sm:text-base">
+      {
+        rows.map(([label, sean, agent]) => (
+          <tr>
+            <th scope="row" class="border-b border-stone-100 p-4 align-top font-semibold text-stone-800">{label}</th>
+            <td class="border-b border-stone-100 bg-pine-50/60 p-4 align-top font-medium text-pine-900">{sean}</td>
+            <td class="border-b border-stone-100 p-4 align-top text-stone-600">{agent}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+<p class="mt-3 text-xs text-stone-500">
+  *Typical figures for traditional listed sales, as described on our original site; your agent's
+  terms and your local market may differ. We'd genuinely rather you compare both paths with real
+  numbers — ask us and we'll help you do it.
+</p>
