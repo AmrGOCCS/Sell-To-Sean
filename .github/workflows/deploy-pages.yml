@@ -1,0 +1,64 @@
+# Preview deployment to GitHub Pages: https://amrgoccs.github.io/Sell-To-Sean/
+#
+# NOTE: This is a PREVIEW host only. GitHub Pages serves this project under
+# the /Sell-To-Sean/ subpath, so this workflow rewrites the site's
+# root-absolute URLs after building. It also has no serverless functions and
+# no real 301 redirects — production should ship to Vercel or Netlify with
+# the custom domain (see README §Deploy), where none of this is needed.
+name: Deploy preview to GitHub Pages
+
+on:
+  push:
+    branches: [claude/dazzling-allen-w0rlkd, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build with GitHub Pages base path
+        run: npx astro build --site "https://amrgoccs.github.io" --base "/Sell-To-Sean"
+      - name: Rewrite handwritten root-absolute URLs for the subpath
+        # Astro's --base only prefixes the URLs it generates (assets, CSS).
+        # Handwritten hrefs like href="/about/" need the same prefix. The
+        # first expression protects already-prefixed URLs from double-prefixing.
+        run: |
+          find dist -name '*.html' -print0 | xargs -0 sed -i \
+            -e 's|"/Sell-To-Sean/|"@@B@@|g' \
+            -e 's|href="/|href="/Sell-To-Sean/|g' \
+            -e 's|src="/|src="/Sell-To-Sean/|g' \
+            -e 's|action="/|action="/Sell-To-Sean/|g' \
+            -e 's|;url=/|;url=/Sell-To-Sean/|g' \
+            -e "s|location.assign('/thank-you/')|location.assign('/Sell-To-Sean/thank-you/')|g" \
+            -e 's|"@@B@@|"/Sell-To-Sean/|g'
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
