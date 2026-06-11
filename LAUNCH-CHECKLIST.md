@@ -4,8 +4,11 @@ Work top to bottom. Nothing ships while a **BLOCKER** is open.
 
 ## 1. Content verification (owner) — BLOCKERS
 
-- [ ] **BLOCKER** Replace `[PHOTO OF SEAN]` placeholders with real photos
-      (hero, about page) — the personal brand IS the strategy
+- [x] ~~Replace `[PHOTO OF SEAN]` placeholders~~ — done: real
+      `sean-profile-pic-2026.webp` (hero + about) and
+      `sean-in-a-house-he-bought-sq.webp` (homepage story). Optional upgrade:
+      a higher-res version (900px+) of the profile photo for crisper retina
+      rendering
 - [ ] **BLOCKER** Set the callback promise: replace `[X — VERIFY]` hours in
       `src/data/site.js` (`callbackPromise`) with a number the team will
       actually hit, every time, including Saturdays

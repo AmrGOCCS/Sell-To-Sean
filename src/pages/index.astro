@@ -57,15 +57,14 @@ const homeFaqs = faqsFor('home').slice(0, 6);
       <figure class="relative mx-auto w-full max-w-sm lg:max-w-none">
         <!-- Offset frame behind the photo -->
         <div aria-hidden="true" class="absolute -top-4 -right-4 h-full w-full rounded-3xl bg-pine-800/90 lg:-top-5 lg:-right-5"></div>
-        <!-- LCP element: lightweight SVG placeholder, explicit dimensions, no CLS.
-             Replace with a real, warm photo of Sean (see README §Images). -->
+        <!-- LCP element: explicit dimensions, no CLS -->
         <img
-          src="/images/sean-placeholder.svg"
-          alt="[PHOTO OF SEAN GRABOW — replace with a real, friendly photo of Sean in front of a Columbus house]"
-          width="480"
-          height="560"
+          src="/images/sean-profile-pic-2026.webp"
+          alt="Sean Grabow, founder of Sell to Sean, smiling in downtown Columbus, Ohio"
+          width="450"
+          height="450"
           fetchpriority="high"
-          class="relative w-full rounded-3xl border border-stone-200 shadow-xl"
+          class="relative aspect-square w-full rounded-3xl border border-stone-200 object-cover shadow-xl"
         />
         <!-- Floating proof chips (decorative motion, reduced-motion safe) -->
         <div class="animate-float absolute -left-4 top-8 hidden items-center gap-2 rounded-xl border border-stone-200 bg-white/95 px-3.5 py-2.5 shadow-lg sm:flex lg:-left-8">
@@ -166,10 +165,10 @@ const homeFaqs = faqsFor('home').slice(0, 6);
       <div class="reveal relative mx-auto w-full max-w-xs lg:max-w-sm">
         <div aria-hidden="true" class="absolute -bottom-4 -left-4 h-full w-full rounded-3xl border-2 border-dashed border-pine-300"></div>
         <img
-          src="/images/sean-placeholder.svg"
-          alt="[PHOTO OF SEAN — replace with a candid photo of Sean talking with a homeowner]"
-          width="480"
-          height="560"
+          src="/images/sean-in-a-house-he-bought-sq.webp"
+          alt="Sean inside a Columbus house he bought"
+          width="450"
+          height="450"
           loading="lazy"
           class="relative w-full rounded-3xl border border-stone-200 shadow-md"
         />

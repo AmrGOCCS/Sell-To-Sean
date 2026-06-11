@@ -70,12 +70,14 @@ Situation pages work the same way in `src/data/situations.js`.
 
 ## Replace the placeholder images
 
-Search the repo for `[PHOTO` to find every placeholder. Priority order:
-1. `public/images/sean-placeholder.svg` → real photo of Sean (hero + about).
-   Export ~960px wide, save as `.webp`, keep the same width/height ratio
-   (480×560) to avoid layout shift, and update the `src` + `alt` text.
-2. Before/after project photos (4 pairs) from the current site.
-3. `public/images/og-default.svg` → a real 1200×630 social share image.
+Sean's real photos are in place (`sean-profile-pic-2026.webp` in the hero and
+About page, `sean-in-a-house-he-bought-sq.webp` in the homepage story
+section — both 450×450 from the original site; a 900px+ re-export would be
+crisper on retina screens). Still placeholders — search the repo for `[PHOTO`
+/ `[BEFORE` / `[AFTER`:
+1. Before/after project photos (4 pairs) from the current site.
+2. `public/images/og-default.svg` → a real 1200×630 social share image
+   (ideally built around the profile photo).
 
 ## Analytics & event tracking (GA4-ready)
 
