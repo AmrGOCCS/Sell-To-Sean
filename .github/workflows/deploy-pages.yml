@@ -44,7 +44,6 @@ jobs:
             -e 's|src="/|src="/Sell-To-Sean/|g' \
             -e 's|action="/|action="/Sell-To-Sean/|g' \
             -e 's|;url=/|;url=/Sell-To-Sean/|g' \
-            -e "s|location.assign('/thank-you/')|location.assign('/Sell-To-Sean/thank-you/')|g" \
             -e 's|"@@B@@|"/Sell-To-Sean/|g'
       - uses: actions/configure-pages@v5
         with:

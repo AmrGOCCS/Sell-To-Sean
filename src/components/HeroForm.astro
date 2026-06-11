@@ -101,6 +101,10 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
 </form>
 
 <script>
+  // Base-aware URLs: BASE_URL is inlined at build time ('/' in production,
+  // '/Sell-To-Sean/' on the GitHub Pages preview), so redirects work on both.
+  const SITE_BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
   function initQuickForm(form: HTMLFormElement) {
     const dl = (event: string, extra: Record<string, unknown> = {}) =>
       (window as any).dataLayer.push({ event, form_location: location.pathname, variant: 'hero_quick', ...extra });
@@ -187,7 +191,7 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
         } else {
           console.info('[Sell to Sean] No PUBLIC_LEAD_WEBHOOK_URL configured. Lead payload:', payload);
         }
-        location.assign('/thank-you/');
+        location.assign(SITE_BASE + '/thank-you/');
       } catch (err) {
         btn.disabled = false;
         btn.innerHTML = 'Get My Cash Offer <span aria-hidden="true">→</span>';

@@ -205,6 +205,10 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
 </section>
 
 <script>
+  // Base-aware redirect target (works at '/' in production and under the
+  // '/Sell-To-Sean/' GitHub Pages preview path)
+  const SITE_BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
   function initLeadForm(form: HTMLFormElement) {
     const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-step]'));
     const progress = form.querySelector<HTMLElement>('[data-progress]')!;
@@ -342,7 +346,7 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
         } else {
           console.info('[Sell to Sean] No PUBLIC_LEAD_WEBHOOK_URL configured. Lead payload:', payload);
         }
-        location.assign('/thank-you/');
+        location.assign(SITE_BASE + '/thank-you/');
       } catch (err) {
         // Never lose a lead to a tech failure: show the phone number.
         submitBtn.disabled = false;
