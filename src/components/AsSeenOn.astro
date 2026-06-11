@@ -1,0 +1,37 @@
+---
+/**
+ * "As Seen On" trust strip. These badge assets (ABC, CBS, FOX, NBC, BBB,
+ * Google) are pulled from the CURRENT live selltosean.com, which displays
+ * them today — so the claim is preserved, not invented.
+ * [VERIFY before launch: which affiliate stories these refer to — see
+ * LAUNCH-CHECKLIST.]
+ */
+const badges = [
+  { src: '/images/badges/abc.png', alt: 'ABC', w: 40, h: 40 },
+  { src: '/images/badges/cbs.png', alt: 'CBS', w: 130, h: 40 },
+  { src: '/images/badges/fox.png', alt: 'FOX', w: 92, h: 40 },
+  { src: '/images/badges/nbc.png', alt: 'NBC', w: 132, h: 40 },
+  { src: '/images/badges/bbb.png', alt: 'BBB A+ Rated', w: 144, h: 40 },
+  { src: '/images/badges/google.png', alt: 'Google reviews', w: 90, h: 40 },
+];
+---
+
+<div class="reveal flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8">
+  <p class="text-xs font-bold tracking-widest text-slate-400 uppercase">As seen on</p>
+  <ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+    {
+      badges.map((b) => (
+        <li>
+          <img
+            src={b.src}
+            alt={b.alt}
+            width={b.w}
+            height={b.h}
+            loading="lazy"
+            class="h-8 w-auto opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 sm:h-9"
+          />
+        </li>
+      ))
+    }
+  </ul>
+</div>

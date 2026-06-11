@@ -11,16 +11,16 @@ interface Props {
 const { reviews, intro } = Astro.props;
 ---
 
-{intro && <p class="mb-5 font-semibold text-stone-700">{intro}</p>}
+{intro && <p class="mb-5 font-semibold text-slate-700">{intro}</p>}
 <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
   {
     reviews.map((r, i) => (
       <li class="card card-lift reveal flex flex-col" style={`--reveal-delay:${(i % 3) * 100}ms`}>
-        <svg width="28" height="22" viewBox="0 0 28 22" aria-hidden="true" class="mb-3 text-pine-200">
+        <svg width="28" height="22" viewBox="0 0 28 22" aria-hidden="true" class="mb-3 text-brand-200">
           <path d="M12 0v8.7C12 16 8 20.6 1.3 22l-1-2.6c3.3-1.3 5.3-3.6 5.8-6.7H0V0h12Zm16 0v8.7C28 16 24 20.6 17.3 22l-1-2.6c3.3-1.3 5.3-3.6 5.8-6.7H16V0h12Z" fill="currentColor" />
         </svg>
-        <blockquote class="flex-1 leading-relaxed text-stone-700">{r.text}</blockquote>
-        <p class="mt-4 font-bold text-pine-900">— {r.name}<span class="block text-xs font-medium text-stone-500">Columbus-area seller</span></p>
+        <blockquote class="flex-1 leading-relaxed text-slate-700">{r.text}</blockquote>
+        <p class="mt-4 font-bold text-brand-900">— {r.name}<span class="block text-xs font-medium text-slate-500">Columbus-area seller</span></p>
       </li>
     ))
   }

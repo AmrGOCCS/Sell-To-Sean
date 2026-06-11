@@ -22,13 +22,13 @@ const steps = [
 
 <ol class="relative grid gap-6 md:grid-cols-3 md:gap-8">
   <!-- Connector line between steps (desktop) -->
-  <div aria-hidden="true" class="absolute top-12 right-[12%] left-[12%] hidden border-t-2 border-dashed border-pine-200 md:block"></div>
+  <div aria-hidden="true" class="absolute top-12 right-[12%] left-[12%] hidden border-t-2 border-dashed border-brand-200 md:block"></div>
 
   {
     steps.map((step, i) => (
       <li class="card card-lift reveal relative" style={`--reveal-delay:${i * 120}ms`}>
         <div class="flex items-center gap-3">
-          <span class="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-pine-600 to-pine-800 text-white shadow-md" aria-hidden="true">
+          <span class="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-md" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d={step.icon} />
             </svg>
@@ -38,7 +38,7 @@ const steps = [
           </span>
         </div>
         <h3 class="mt-4 text-xl">{step.title}</h3>
-        <p class="mt-2 leading-relaxed text-stone-600">{step.body}</p>
+        <p class="mt-2 leading-relaxed text-slate-600">{step.body}</p>
       </li>
     ))
   }

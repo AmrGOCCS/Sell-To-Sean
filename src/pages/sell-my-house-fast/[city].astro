@@ -31,22 +31,22 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug);
     ]),
   ]}
 >
-  <section class="border-b border-stone-200 bg-gradient-to-b from-stone-warm to-cream py-12 sm:py-16">
+  <section class="border-b border-slate-200 bg-gradient-to-b from-ice to-cream py-12 sm:py-16">
     <div class="container-site max-w-3xl">
-      <nav aria-label="Breadcrumb" class="mb-4 text-sm text-stone-500">
-        <a href="/" class="underline hover:text-pine-700">Home</a>
+      <nav aria-label="Breadcrumb" class="mb-4 text-sm text-slate-500">
+        <a href="/" class="underline hover:text-brand-700">Home</a>
         <span aria-hidden="true"> / </span>
         <span aria-current="page">Sell My House Fast in {city.name}</span>
       </nav>
       <h1 style="font-size: var(--text-display)">Sell your house fast in {city.name}, Ohio</h1>
-      <p class="mt-4 text-lg leading-relaxed text-stone-700">
+      <p class="mt-4 text-lg leading-relaxed text-slate-700">
         Get a fair, written cash offer on your {city.name} house in 24 hours — no fees, no
         repairs, no obligation. Sell to Sean is a local buyer based in Columbus, buying across
         {city.county} since {SITE.founded}.
       </p>
-      <div class="mt-7 max-w-xl rounded-3xl border-2 border-pine-100 bg-white/90 p-5 shadow-xl backdrop-blur-sm sm:p-6">
-        <p class="mb-1 font-display text-xl font-bold text-pine-950">Get your free cash offer 👇</p>
-        <p class="mb-4 text-sm text-stone-600">Takes 2 minutes. No obligation — just a real number.</p>
+      <div class="mt-7 max-w-xl rounded-3xl border-2 border-brand-100 bg-white/90 p-5 shadow-xl backdrop-blur-sm sm:p-6">
+        <p class="mb-1 font-display text-xl font-bold text-brand-950">Get your free cash offer 👇</p>
+        <p class="mb-4 text-sm text-slate-600">Takes 2 minutes. No obligation — just a real number.</p>
         <HeroForm />
       </div>
     </div>
@@ -68,7 +68,7 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug);
     </div>
   </section>
 
-  <section class="bg-stone-warm py-14 sm:py-20" aria-label="How it works">
+  <section class="bg-ice py-14 sm:py-20" aria-label="How it works">
     <div class="container-site">
       <h2 class="mb-8" style="font-size: var(--text-h2)">Selling a {city.name} house in three steps</h2>
       <HowItWorksSteps />
@@ -81,9 +81,9 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug);
       <div class="mt-7 grid gap-5 md:grid-cols-2">
         {
           linkedSituations.map((s) => (
-            <a href={`/we-buy-houses/${s.slug}/`} class="card group transition hover:border-pine-400 hover:shadow-md">
-              <h3 class="text-lg group-hover:text-pine-800">{s.h1}</h3>
-              <span class="mt-2 inline-block font-semibold text-pine-700">Straight answers →</span>
+            <a href={`/we-buy-houses/${s.slug}/`} class="card group transition hover:border-brand-400 hover:shadow-md">
+              <h3 class="text-lg group-hover:text-brand-800">{s.h1}</h3>
+              <span class="mt-2 inline-block font-semibold text-brand-700">Straight answers →</span>
             </a>
           ))
         }
@@ -91,23 +91,23 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug);
     </div>
   </section>
 
-  <section class="bg-stone-warm py-14 sm:py-20" aria-label="Reviews">
+  <section class="bg-ice py-14 sm:py-20" aria-label="Reviews">
     <div class="container-site">
       <h2 class="mb-8" style="font-size: var(--text-h2)">Columbus-area sellers on working with Sean</h2>
       <TestimonialCards reviews={FEATURED_REVIEWS.slice(0, 3)} />
-      <p class="mt-6"><a href="/reviews/" class="font-semibold text-pine-700 underline">Read all reviews →</a></p>
+      <p class="mt-6"><a href="/reviews/" class="font-semibold text-brand-700 underline">Read all reviews →</a></p>
     </div>
   </section>
 
-  <section class="border-t border-stone-200 py-8" aria-label="Other service areas">
-    <div class="container-site text-sm text-stone-600">
+  <section class="border-t border-slate-200 py-8" aria-label="Other service areas">
+    <div class="container-site text-sm text-slate-600">
       Also buying in:
       {otherCities.map((c, i) => (
         <Fragment>
-          <a href={`/sell-my-house-fast/${c.slug}/`} class="font-semibold text-pine-700 underline">{c.name}</a>{i < otherCities.length - 1 ? ' · ' : ''}
+          <a href={`/sell-my-house-fast/${c.slug}/`} class="font-semibold text-brand-700 underline">{c.name}</a>{i < otherCities.length - 1 ? ' · ' : ''}
         </Fragment>
       ))}
-      · <a href="/" class="font-semibold text-pine-700 underline">Columbus</a>
+      · <a href="/" class="font-semibold text-brand-700 underline">Columbus</a>
     </div>
   </section>
 

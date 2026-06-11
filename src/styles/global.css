@@ -2,40 +2,43 @@
 
 /* ============================================================
    DESIGN SYSTEM — Sell to Sean
-   Warm, human, local — with modern fintech-level polish.
-   - Pine: brand green (trust, continuity with current brand)
-   - Clay: warm CTA orange (AA contrast with white at 600+)
-   - Cream/stone: warm neutrals (never cold gray)
-   Type: Lora (headings, warm editorial) + Inter (UI/body)
+   Anchored to the real Sell to Sean logo (navy #002952 + red #ba0c13,
+   sampled from the original brand asset). Energetic, friendly, local —
+   zero corporate stiffness.
+   - Brand: navy→vivid blue ramp (logo navy at the dark end)
+   - Clay: logo-red CTA ramp (#ba0c13 = clay-600; white on it = 6.7:1 AA)
+   - Ice / cream: light blue-tinted surfaces
+   - Highlight: sunny marker-yellow for headline pops
+   Type: Lora (headings) + Inter (body)
    Motion: transform/opacity only (no CLS), JS-gated reveals,
    fully disabled under prefers-reduced-motion.
    ============================================================ */
 
 @theme {
-  --color-pine-50: #effaf4;
-  --color-pine-100: #d8efe2;
-  --color-pine-200: #b3dfc9;
-  --color-pine-300: #82c7a8;
-  --color-pine-400: #4fa983;
-  --color-pine-500: #2e8c67;
-  --color-pine-600: #1f7052;
-  --color-pine-700: #1b5a44;
-  --color-pine-800: #194a39;
-  --color-pine-900: #143c2f;
-  --color-pine-950: #0a221a;
+  --color-brand-50: #eef6ff;
+  --color-brand-100: #d9eaff;
+  --color-brand-200: #b6d6ff;
+  --color-brand-300: #84b8fd;
+  --color-brand-400: #4a90f4;
+  --color-brand-500: #1f68e0;
+  --color-brand-600: #0d4fba;
+  --color-brand-700: #073d92;
+  --color-brand-800: #063272;
+  --color-brand-900: #002952; /* logo navy */
+  --color-brand-950: #001730;
 
-  --color-clay-50: #fef5ee;
-  --color-clay-100: #fde8d7;
-  --color-clay-200: #facdae;
-  --color-clay-300: #f6aa7b;
-  --color-clay-400: #f17d45;
-  --color-clay-500: #ed5c21;
-  --color-clay-600: #c2410c;
-  --color-clay-700: #9a3412;
-  --color-clay-800: #7c2d12;
+  --color-clay-50: #fef2f2;
+  --color-clay-100: #fde3e3;
+  --color-clay-200: #fbc5c6;
+  --color-clay-300: #f79a9c;
+  --color-clay-400: #ef5f63;
+  --color-clay-500: #db2f35;
+  --color-clay-600: #ba0c13; /* logo red */
+  --color-clay-700: #9a0a10;
+  --color-clay-800: #7c0a0e;
 
-  --color-cream: #faf7f1;
-  --color-stone-warm: #f5f1e8;
+  --color-cream: #f7faff;
+  --color-ice: #e9f2fc;
 
   --font-display: 'Lora Variable', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -45,9 +48,9 @@
   --text-h2: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
   --text-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
 
-  --shadow-glow-clay: 0 8px 30px -6px rgba(194, 65, 12, 0.45);
-  --shadow-card: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px -12px rgba(28, 25, 23, 0.12);
-  --shadow-card-hover: 0 2px 4px rgba(28, 25, 23, 0.05), 0 18px 40px -16px rgba(28, 25, 23, 0.22);
+  --shadow-glow-clay: 0 8px 30px -6px rgba(186, 12, 19, 0.45);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.14);
+  --shadow-card-hover: 0 2px 4px rgba(15, 23, 42, 0.05), 0 18px 40px -16px rgba(0, 41, 82, 0.28);
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float 9s ease-in-out infinite reverse;
@@ -57,8 +60,8 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  0%, 100% { transform: translateY(0) rotate(var(--float-tilt, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--float-tilt, 0deg)); }
 }
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -77,8 +80,8 @@
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes cta-pulse {
-  0%, 100% { box-shadow: 0 8px 30px -6px rgba(194, 65, 12, 0.45), 0 0 0 0 rgba(237, 92, 33, 0.45); }
-  50% { box-shadow: 0 8px 30px -6px rgba(194, 65, 12, 0.55), 0 0 0 12px rgba(237, 92, 33, 0); }
+  0%, 100% { box-shadow: 0 8px 30px -6px rgba(186, 12, 19, 0.45), 0 0 0 0 rgba(219, 47, 53, 0.45); }
+  50% { box-shadow: 0 8px 30px -6px rgba(186, 12, 19, 0.55), 0 0 0 12px rgba(219, 47, 53, 0); }
 }
 @keyframes wiggle {
   0%, 92%, 100% { transform: rotate(0); }
@@ -93,11 +96,11 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-cream font-sans text-stone-800 antialiased;
+    @apply bg-cream font-sans text-slate-800 antialiased;
   }
   h1, h2, h3 {
     font-family: var(--font-display);
-    @apply text-pine-950 font-semibold tracking-tight text-balance;
+    @apply text-brand-950 font-semibold tracking-tight text-balance;
   }
   /* Visible focus for keyboard users (WCAG 2.4.7 / 2.4.11) */
   :focus-visible {
@@ -121,14 +124,13 @@
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
 
-  /* Primary CTA: gradient, glow, shine sweep on hover. 48px+ touch target,
-     AA contrast (white on #c2410c = 4.8:1). */
+  /* Primary CTA: logo-red gradient, glow, shine sweep on hover. */
   .btn-primary {
     @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3 text-base font-semibold text-white transition-all duration-200;
     background-image: linear-gradient(135deg, var(--color-clay-500), var(--color-clay-600) 55%, var(--color-clay-700));
     box-shadow: var(--shadow-glow-clay);
   }
-  .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); }
+  .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.08); }
   .btn-primary:active { transform: translateY(0) scale(0.98); }
   .btn-primary::after {
     content: '';
@@ -148,17 +150,17 @@
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-pine-700 bg-white/70 px-6 py-3 text-base font-semibold text-pine-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:bg-pine-50;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-brand-700 bg-white/70 px-6 py-3 text-base font-semibold text-brand-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-50;
   }
 
   .field-input {
-    @apply min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-base text-stone-900 transition-shadow placeholder:text-stone-400 focus:border-pine-500 focus:shadow-[0_0_0_4px_rgba(46,140,103,0.15)];
+    @apply min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 transition-shadow placeholder:text-slate-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(31,104,224,0.16)];
   }
   .field-input[aria-invalid='true'] {
     @apply border-2 border-red-600;
   }
   .field-label {
-    @apply mb-1.5 block text-sm font-semibold text-stone-700;
+    @apply mb-1.5 block text-sm font-semibold text-slate-700;
   }
   .field-error {
     @apply mt-1.5 hidden text-sm font-medium text-red-700;
@@ -170,14 +172,14 @@
 
   /* One-tap choice chips for form steps 2 & 3 */
   .chip-option {
-    @apply flex min-h-14 w-full cursor-pointer items-center justify-between rounded-xl border-2 border-stone-200 bg-white px-4 py-3 text-left text-base font-medium text-stone-800 transition-all duration-150 hover:-translate-y-0.5 hover:border-pine-500 hover:shadow-md;
+    @apply flex min-h-14 w-full cursor-pointer items-center justify-between rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-left text-base font-medium text-slate-800 transition-all duration-150 hover:-translate-y-0.5 hover:border-brand-500 hover:shadow-md;
   }
   .chip-option:has(input:checked) {
-    @apply border-pine-700 bg-pine-50 text-pine-900 shadow-[0_0_0_4px_rgba(46,140,103,0.12)];
+    @apply border-brand-700 bg-brand-50 text-brand-900 shadow-[0_0_0_4px_rgba(31,104,224,0.14)];
   }
 
   .card {
-    @apply rounded-2xl border border-stone-200 bg-white p-6;
+    @apply rounded-2xl border border-slate-200 bg-white p-6;
     box-shadow: var(--shadow-card);
   }
   .card-lift {
@@ -189,11 +191,11 @@
   }
 
   .eyebrow {
-    @apply mb-2 block text-sm font-bold tracking-widest text-pine-600 uppercase;
+    @apply mb-2 block text-sm font-bold tracking-widest text-brand-600 uppercase;
   }
   /* Pill eyebrow with live pulse dot */
   .eyebrow-pill {
-    @apply mb-4 inline-flex items-center gap-2 rounded-full border border-pine-200 bg-white/80 px-4 py-1.5 text-xs font-bold tracking-widest text-pine-700 uppercase shadow-sm backdrop-blur;
+    @apply mb-4 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-4 py-1.5 text-xs font-bold tracking-widest text-brand-700 uppercase shadow-sm backdrop-blur;
   }
   .eyebrow-pill::before {
     content: '';
@@ -201,12 +203,12 @@
     animation: var(--animate-pulse-dot);
   }
 
-  /* Highlighted word in headlines: warm marker underline */
+  /* Highlighted word in headlines: sunny marker swipe */
   .hl {
     @apply relative whitespace-nowrap;
-    background-image: linear-gradient(120deg, rgba(246, 170, 123, 0.55), rgba(241, 125, 69, 0.45));
+    background-image: linear-gradient(120deg, rgba(255, 213, 74, 0.75), rgba(255, 184, 48, 0.6));
     background-repeat: no-repeat;
-    background-size: 100% 0.4em;
+    background-size: 100% 0.42em;
     background-position: 0 88%;
     border-radius: 2px;
   }
@@ -230,10 +232,10 @@
 
   .prose-site h2 { @apply mt-10 mb-4 text-2xl; }
   .prose-site h3 { @apply mt-8 mb-3 text-xl; }
-  .prose-site p, .prose-site li { @apply mb-4 text-base leading-relaxed text-stone-700; }
+  .prose-site p, .prose-site li { @apply mb-4 text-base leading-relaxed text-slate-700; }
   .prose-site ul { @apply mb-4 list-disc pl-6; }
   .prose-site ol { @apply mb-4 list-decimal pl-6; }
-  .prose-site a { @apply font-semibold text-pine-700 underline; }
+  .prose-site a { @apply font-semibold text-brand-700 underline; }
 }
 
 @layer utilities {

@@ -21,21 +21,21 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
 
 <section class="card mx-auto max-w-xl !p-6 sm:!p-8" aria-labelledby={`${id}-heading`}>
   <h2 id={`${id}-heading`} class="text-2xl">{heading}</h2>
-  <p class="mt-1 mb-5 text-sm text-stone-600">
+  <p class="mt-1 mb-5 text-sm text-slate-600">
     Takes about 2 minutes · No obligation · Your info stays private
   </p>
 
   <form data-lead-form data-webhook={webhookUrl} novalidate>
     <!-- Progress -->
     <div class="mb-6">
-      <div class="mb-1.5 flex justify-between text-xs font-semibold text-stone-500">
+      <div class="mb-1.5 flex justify-between text-xs font-semibold text-slate-500">
         <span data-step-label>Step 1 of 4 — Your property</span>
         <span data-step-count>25%</span>
       </div>
-      <div class="h-2 rounded-full bg-stone-200" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="Form progress">
+      <div class="h-2 rounded-full bg-slate-200" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="Form progress">
         <div
           data-progress
-          class="h-2 w-1/4 rounded-full bg-gradient-to-r from-pine-500 to-pine-700 shadow-[0_0_10px_rgba(46,140,103,0.5)] transition-all duration-500 ease-out"
+          class="h-2 w-1/4 rounded-full bg-gradient-to-r from-brand-500 to-brand-700 shadow-[0_0_10px_rgba(46,140,103,0.5)] transition-all duration-500 ease-out"
         >
         </div>
       </div>
@@ -57,13 +57,13 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
       />
       <p class="field-error" role="alert"></p>
       <button type="button" class="btn-primary mt-4 w-full" data-next>Get My Cash Offer →</button>
-      <p class="mt-3 text-center text-xs text-stone-500">Free written offer · You decide after you see the number</p>
+      <p class="mt-3 text-center text-xs text-slate-500">Free written offer · You decide after you see the number</p>
     </fieldset>
 
     <!-- STEP 2: condition -->
     <fieldset data-step="2" hidden>
       <legend class="field-label !text-base">What kind of shape is the house in?</legend>
-      <p class="mb-3 text-sm text-stone-600">Rough guess is fine — we buy in any condition.</p>
+      <p class="mb-3 text-sm text-slate-600">Rough guess is fine — we buy in any condition.</p>
       <div class="space-y-2.5" role="radiogroup" data-required-group data-error-msg="Pick the closest one — a rough guess is fine.">
         {
           [
@@ -75,9 +75,9 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
             <label class="chip-option">
               <span>
                 <span class="block">{label}</span>
-                <span class="block text-sm font-normal text-stone-500">{hint}</span>
+                <span class="block text-sm font-normal text-slate-500">{hint}</span>
               </span>
-              <input type="radio" name="condition" value={val} class="h-5 w-5 accent-pine-700" />
+              <input type="radio" name="condition" value={val} class="h-5 w-5 accent-brand-700" />
             </label>
           ))
         }
@@ -92,7 +92,7 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
     <!-- STEP 3: timeline -->
     <fieldset data-step="3" hidden>
       <legend class="field-label !text-base">How soon would you like to sell?</legend>
-      <p class="mb-3 text-sm text-stone-600">We close on your schedule — fast or slow.</p>
+      <p class="mb-3 text-sm text-slate-600">We close on your schedule — fast or slow.</p>
       <div class="space-y-2.5" role="radiogroup" data-required-group data-error-msg="Pick the closest one — you can always change your mind.">
         {
           [
@@ -103,9 +103,9 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
             <label class="chip-option">
               <span>
                 <span class="block">{label}</span>
-                <span class="block text-sm font-normal text-stone-500">{hint}</span>
+                <span class="block text-sm font-normal text-slate-500">{hint}</span>
               </span>
-              <input type="radio" name="timeline" value={val} class="h-5 w-5 accent-pine-700" />
+              <input type="radio" name="timeline" value={val} class="h-5 w-5 accent-brand-700" />
             </label>
           ))
         }
@@ -150,9 +150,9 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
 
         <!-- TCPA consent. Two-checkbox pattern carried over from the current
              site. [HAVE ATTORNEY REVIEW] before launch — see LAUNCH-CHECKLIST. -->
-        <div class="space-y-3 rounded-xl bg-stone-warm p-4 text-xs leading-relaxed text-stone-600">
+        <div class="space-y-3 rounded-xl bg-ice p-4 text-xs leading-relaxed text-slate-600">
           <label class="flex cursor-pointer gap-2.5">
-            <input type="checkbox" name="consent_transactional" value="yes" required class="mt-0.5 h-5 w-5 shrink-0 accent-pine-700" data-error-msg="Please check this box so we're allowed to contact you about your offer." />
+            <input type="checkbox" name="consent_transactional" value="yes" required class="mt-0.5 h-5 w-5 shrink-0 accent-brand-700" data-error-msg="Please check this box so we're allowed to contact you about your offer." />
             <span>
               I agree to receive calls, texts, and emails from {SITE.legalName} d/b/a Sell to Sean
               about my property inquiry, such as my offer, questions, and appointment details.
@@ -162,7 +162,7 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
             </span>
           </label>
           <label class="flex cursor-pointer gap-2.5">
-            <input type="checkbox" name="consent_marketing" value="yes" class="mt-0.5 h-5 w-5 shrink-0 accent-pine-700" />
+            <input type="checkbox" name="consent_marketing" value="yes" class="mt-0.5 h-5 w-5 shrink-0 accent-brand-700" />
             <span>
               I also agree to receive occasional marketing calls, texts, and emails, such as offers
               and real-estate updates. Not required to sell your house. Consent is not a condition
@@ -176,7 +176,7 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
         <button type="button" class="btn-secondary" data-back>← Back</button>
         <button type="submit" class="btn-primary flex-1">Send Me My Offer</button>
       </div>
-      <p class="mt-3 text-center text-xs text-stone-500">
+      <p class="mt-3 text-center text-xs text-slate-500">
         🔒 Your info goes to Sean's team only — never sold to other investors.
       </p>
     </fieldset>
@@ -189,9 +189,9 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
     <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
   </form>
 
-  <p class="mt-5 border-t border-stone-100 pt-4 text-center text-sm text-stone-600">
+  <p class="mt-5 border-t border-slate-100 pt-4 text-center text-sm text-slate-600">
     Rather talk to a person? Call Sean's team:
-    <a href={SITE.phoneHref} class="font-bold text-pine-800 underline" data-track="phone_click" data-loc="lead_form">{SITE.phone}</a>
+    <a href={SITE.phoneHref} class="font-bold text-brand-800 underline" data-track="phone_click" data-loc="lead_form">{SITE.phone}</a>
   </p>
 </section>
 

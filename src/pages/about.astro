@@ -16,12 +16,12 @@ const description =
   description={description}
   schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About Sean', path: '/about/' }])]}
 >
-  <section class="bg-stone-warm py-12 sm:py-16">
+  <section class="bg-ice py-12 sm:py-16">
     <div class="container-site grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
         <span class="eyebrow">{SITE.tagline}</span>
         <h1 style="font-size: var(--text-display)">The "Sean" in Sell to Sean is a real person.</h1>
-        <p class="mt-4 text-lg leading-relaxed text-stone-700">
+        <p class="mt-4 text-lg leading-relaxed text-slate-700">
           Sean Grabow grew up in Columbus, went through a stressful home sale of his own, and
           decided in {SITE.founded} there should be a simpler way for his neighbors to sell.
           That became {SITE.legalName} — better known around town as Sell to Sean.
@@ -33,7 +33,7 @@ const description =
         width="450"
         height="450"
         fetchpriority="high"
-        class="mx-auto w-full max-w-sm rounded-3xl border border-stone-200 shadow-lg"
+        class="mx-auto w-full max-w-sm rounded-3xl border border-slate-200 shadow-lg"
       />
     </div>
   </section>
@@ -87,7 +87,7 @@ const description =
     </div>
   </section>
 
-  <section class="bg-stone-warm py-14 sm:py-20" aria-labelledby="about-reviews">
+  <section class="bg-ice py-14 sm:py-20" aria-labelledby="about-reviews">
     <div class="container-site">
       <h2 id="about-reviews" class="mb-8" style="font-size: var(--text-h2)">What neighbors say about working with Sean</h2>
       <TestimonialCards reviews={FEATURED_REVIEWS.slice(0, 3)} />

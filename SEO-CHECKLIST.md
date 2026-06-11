@@ -41,7 +41,9 @@
   hours exactly match the site footer (NAP consistency); add photos; set the
   website link to the homepage with UTM tagging
 - [ ] Confirm BBB profile is active and matches "A+" claim — or remove claim
-- [ ] Identify real "As Seen On" outlets or drop that concept entirely
+- [ ] "As Seen On" badges (ABC/CBS/FOX/NBC, from the old site) are live on the
+      homepage — confirm the underlying media mentions are real and keep proof
+      on file
 - [ ] Update Yelp/LinkedIn listings to point at the new URLs
 - [ ] Bing Webmaster Tools + Bing Places (cheap wins for this niche)
 - [ ] After launch: watch which non-launch cities drive form fills (GA4

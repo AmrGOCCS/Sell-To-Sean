@@ -19,7 +19,10 @@ Work top to bottom. Nothing ships while a **BLOCKER** is open.
 - [ ] Before/after project photos (4 pairs) + one-line real descriptions
 - [ ] Verify email address + office hours on /contact/ (`src/data/site.js`)
 - [ ] Verify Whitehall point-of-sale inspection note on the city page
-- [ ] Name real "As Seen On" outlets, or leave it cut (it's already cut)
+- [ ] "As Seen On" strip restored with the ABC/CBS/FOX/NBC + BBB + Google
+      badges that the old site displays — **verify which affiliate
+      stories/mentions these refer to** (keep links/proof on file), or remove
+      the strip (`src/components/AsSeenOn.astro`)
 - [ ] Final sweep: `grep -rn "VERIFY\|PLACEHOLDER\|\[PHOTO\|\[REAL" src/ public/`
       must return nothing
 

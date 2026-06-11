@@ -14,10 +14,10 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-pine-950 py-14 sm:py-20" aria-labelledby="final-cta-heading">
+<section class="relative overflow-hidden bg-brand-950 py-14 sm:py-20" aria-labelledby="final-cta-heading">
   <!-- Glow + grain for depth on the dark band -->
   <div aria-hidden="true" class="absolute inset-0">
-    <div class="blob -top-32 left-1/4 h-96 w-96 bg-pine-600 opacity-40"></div>
+    <div class="blob -top-32 left-1/4 h-96 w-96 bg-brand-600 opacity-40"></div>
     <div class="blob -right-24 -bottom-32 h-96 w-96 bg-clay-600 opacity-25"></div>
     <div
       class="absolute inset-0 opacity-[0.18]"
@@ -28,13 +28,13 @@ const {
   <div class="container-site relative grid items-center gap-10 lg:grid-cols-2">
     <div>
       <h2 id="final-cta-heading" class="!text-white" style="font-size: var(--text-h2)">{heading}</h2>
-      <p class="mt-4 text-lg leading-relaxed text-pine-100">{sub}</p>
-      <ul class="mt-6 space-y-2.5 text-pine-100">
-        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-pine-300">✓</span> Written offer, usually within 24 hours</li>
-        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-pine-300">✓</span> No fees, no repairs, no cleanout</li>
-        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-pine-300">✓</span> Close in as little as 7 days — or on your date</li>
+      <p class="mt-4 text-lg leading-relaxed text-brand-100">{sub}</p>
+      <ul class="mt-6 space-y-2.5 text-brand-100">
+        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-brand-300">✓</span> Written offer, usually within 24 hours</li>
+        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-brand-300">✓</span> No fees, no repairs, no cleanout</li>
+        <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-brand-300">✓</span> Close in as little as 7 days — or on your date</li>
       </ul>
-      <p class="mt-6 text-pine-100">
+      <p class="mt-6 text-brand-100">
         Prefer the phone? <a href={SITE.phoneHref} class="font-bold text-white underline" data-track="phone_click" data-loc="final_cta">{SITE.phone}</a>
       </p>
     </div>

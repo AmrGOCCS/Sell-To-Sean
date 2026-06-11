@@ -15,12 +15,12 @@ const shorts = REVIEWS.filter((r) => r.text.length < 130).slice(0, 10);
     {[false, true].map((clone) => (
       <ul class="flex shrink-0 gap-4" aria-hidden={clone ? 'true' : undefined}>
         {shorts.map((r) => (
-          <li class="flex w-max max-w-xs items-center gap-3 rounded-full border border-stone-200 bg-white py-2.5 pr-5 pl-3 shadow-sm">
-            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-pine-100 text-sm font-bold text-pine-800" aria-hidden="true">
+          <li class="flex w-max max-w-xs items-center gap-3 rounded-full border border-slate-200 bg-white py-2.5 pr-5 pl-3 shadow-sm">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-800" aria-hidden="true">
               {r.name.charAt(0)}
             </span>
-            <span class="truncate text-sm text-stone-700">
-              “{r.text}” <strong class="text-pine-900">— {r.name}</strong>
+            <span class="truncate text-sm text-slate-700">
+              “{r.text}” <strong class="text-brand-900">— {r.name}</strong>
             </span>
           </li>
         ))}

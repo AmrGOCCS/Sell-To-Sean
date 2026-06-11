@@ -1,7 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Sell to Sean — Columbus cash home buyer">
-  <rect width="1200" height="630" fill="#143c2f"/>
-  <path d="M170 200 100 260h22v80h42v-44h12v44h42v-80h22Z" fill="#faf7f1"/>
-  <text x="100" y="430" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#faf7f1">Sell to Sean</text>
-  <text x="100" y="500" font-family="sans-serif" font-size="34" fill="#b3dfc9">Fair cash offer on your Columbus house in 24 hours.</text>
-  <text x="100" y="556" font-family="sans-serif" font-size="28" fill="#82c7a8">No fees · No repairs · No obligation · (614) 412-1601</text>
+  <rect width="1200" height="630" fill="#002952"/>
+  <circle cx="1080" cy="80" r="260" fill="#073d92" opacity="0.45"/>
+  <circle cx="120" cy="600" r="220" fill="#ba0c13" opacity="0.25"/>
+  <path d="M170 200 100 260h22v80h42v-44h12v44h42v-80h22Z" fill="#f7faff"/>
+  <path d="M170 200 100 260h22l48-41 48 41h22Z" fill="#db2f35"/>
+  <text x="100" y="430" font-family="Georgia, serif" font-size="76" font-weight="bold" fill="#f7faff">Sell <tspan fill="#84b8fd">to</tspan> <tspan fill="#ef5f63">Sean</tspan></text>
+  <text x="100" y="500" font-family="sans-serif" font-size="34" fill="#b6d6ff">Fair cash offer on your Columbus house in 24 hours.</text>
+  <text x="100" y="556" font-family="sans-serif" font-size="28" fill="#84b8fd">No fees · No repairs · No obligation · (614) 412-1601</text>
 </svg>
