@@ -40,6 +40,13 @@
   --color-cream: #f7faff;
   --color-ice: #e9f2fc;
 
+  /* Sun: electric yellow accent for tickers, highlights, badges */
+  --color-sun-100: #fff7d6;
+  --color-sun-200: #ffeda3;
+  --color-sun-300: #ffe066;
+  --color-sun-400: #ffd54a;
+  --color-sun-500: #fbbf24;
+
   --font-display: 'Lora Variable', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -108,6 +115,18 @@
   70% { transform: scale(1.2); }
   100% { opacity: 1; transform: scale(1); }
 }
+@keyframes shine-sweep {
+  0%, 60% { transform: translateX(-110%); }
+  80%, 100% { transform: translateX(110%); }
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes bounce-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
 
 @layer base {
   html {
@@ -143,14 +162,19 @@
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
 
-  /* Primary CTA: logo-red gradient, glow, shine sweep on hover. */
+  /* Primary CTA: logo-red gradient, bold outline + hard pop shadow,
+     shine sweep on hover. High contrast, high energy. */
   .btn-primary {
-    @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3 text-base font-semibold text-white transition-all duration-200;
+    @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-brand-950 px-6 py-3 text-base font-bold text-white transition-all duration-200;
     background-image: linear-gradient(135deg, var(--color-clay-500), var(--color-clay-600) 55%, var(--color-clay-700));
-    box-shadow: var(--shadow-glow-clay);
+    box-shadow: 4px 4px 0 0 var(--color-brand-950), var(--shadow-glow-clay);
   }
-  .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.08); }
-  .btn-primary:active { transform: translateY(0) scale(0.98); }
+  .btn-primary:hover {
+    transform: translate(-2px, -2px);
+    filter: brightness(1.08);
+    box-shadow: 7px 7px 0 0 var(--color-brand-950), var(--shadow-glow-clay);
+  }
+  .btn-primary:active { transform: translate(0, 0) scale(0.98); box-shadow: 2px 2px 0 0 var(--color-brand-950); }
   .btn-primary::after {
     content: '';
     @apply absolute inset-0;
@@ -159,6 +183,8 @@
     transition: transform 0.55s ease;
   }
   .btn-primary:hover::after { transform: translateX(110%); }
+  /* Continuous shine sweep for the loudest buttons */
+  .btn-shine::after { animation: shine-sweep 3.2s ease-in-out infinite; }
 
   /* XL "loud" CTA for hero / banners + attention pulse (reduced-motion safe) */
   .btn-xl {
@@ -272,10 +298,11 @@
 @layer utilities {
   /* Scroll-reveal: JS-gated (html.js) so content is always visible without JS.
      Transform/opacity only — zero layout shift. */
+  /* Springy entrance: rises with a slight overshoot for energy */
   html.js .reveal {
     opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(28px) scale(0.96);
+    transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.34, 1.45, 0.64, 1);
     transition-delay: var(--reveal-delay, 0ms);
   }
   html.js .reveal.is-visible {
@@ -329,6 +356,21 @@
 
   /* FAQ answers ease in when opened */
   details[open] .faq-a { animation: fade-down 0.3s ease both; }
+
+  /* Shouting yellow ticker band */
+  .ticker-band {
+    @apply overflow-hidden border-y-2 border-brand-950 bg-sun-400 py-2.5;
+  }
+  .ticker {
+    @apply flex w-max items-center gap-0;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-band:hover .ticker { animation-play-state: paused; }
+  .ticker li {
+    @apply flex items-center gap-3 px-3 text-sm font-black tracking-widest whitespace-nowrap text-brand-950 uppercase;
+  }
+
+  .animate-bounce-x { animation: bounce-x 1.2s ease-in-out infinite; }
 
   /* Top scroll-progress bar */
   .scroll-progress {

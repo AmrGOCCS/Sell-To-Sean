@@ -23,32 +23,33 @@ const homeFaqs = faqsFor('home').slice(0, 6);
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- HERO -->
-  <section class="relative overflow-hidden border-b border-slate-200">
-    <!-- Decorative depth: gradient blobs + subtle dot grid (CSS only, no requests) -->
-    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-ice via-cream to-cream">
-      <div class="blob animate-blob -top-24 -left-24 h-96 w-96 bg-brand-200"></div>
-      <div class="blob animate-blob top-1/3 -right-32 h-[28rem] w-[28rem] bg-clay-100" style="animation-delay:-8s"></div>
-      <div class="blob animate-blob bottom-0 left-1/3 h-72 w-72 bg-brand-100" style="animation-delay:-4s"></div>
+  <!-- HERO: dark, high-contrast, high-energy -->
+  <section class="relative overflow-hidden bg-brand-950">
+    <!-- Vivid drifting blobs + white dot grid on navy (CSS only, no requests) -->
+    <div aria-hidden="true" class="absolute inset-0">
+      <div class="blob animate-blob -top-24 -left-24 h-[30rem] w-[30rem] bg-brand-500 opacity-40"></div>
+      <div class="blob animate-blob top-1/4 -right-32 h-[28rem] w-[28rem] bg-clay-500 opacity-30" style="animation-delay:-8s"></div>
+      <div class="blob animate-blob -bottom-24 left-1/3 h-80 w-80 bg-sun-400 opacity-20" style="animation-delay:-4s"></div>
       <div
-        class="absolute inset-0 opacity-[0.35]"
-        style="background-image: radial-gradient(rgba(0,41,82,0.14) 1px, transparent 1px); background-size: 26px 26px;"
+        class="absolute inset-0 opacity-[0.22]"
+        style="background-image: radial-gradient(rgba(247,250,255,0.5) 1px, transparent 1px); background-size: 26px 26px;"
       >
       </div>
     </div>
 
-    <div class="container-site grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
+    <div class="container-site relative grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
       <div>
-        <span class="eyebrow-pill !normal-case !tracking-normal">
+        <span class="eyebrow-pill !border-white/20 !bg-white/10 !text-white !normal-case !tracking-normal">
           <img src="/images/sean-profile-pic-2026.webp" alt="" width="24" height="24" class="-ml-1 h-6 w-6 rounded-full object-cover" />
           Hi, I'm Sean <span class="animate-wiggle" aria-hidden="true">👋</span> Columbus homebuyer since {SITE.founded}
         </span>
-        <h1 style="font-size: var(--text-display)" class="leading-[1.08]">
-          Your house, sold the <span class="hl">easy way</span>.
+        <h1 style="font-size: var(--text-display)" class="!text-white leading-[1.08]">
+          Your house, sold the
+          <span class="inline-block -rotate-2 rounded-xl bg-sun-400 px-2.5 !text-brand-950 shadow-[4px_4px_0_0_rgba(186,12,19,0.9)]">easy way</span>.
         </h1>
-        <p class="mt-4 max-w-xl text-lg leading-relaxed text-slate-700">
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-brand-100">
           Fair cash offer in 24 hours — even if it has
-          <span class="rotator font-bold text-brand-800" aria-hidden="true">
+          <span class="rotator font-bold text-sun-300" aria-hidden="true">
             <span class="is-on">a leaky roof 🏚️</span>
             <span>tenants in it 😅</span>
             <span>40 years of stuff 📦</span>
@@ -59,7 +60,7 @@ const homeFaqs = faqsFor('home').slice(0, 6);
         </p>
 
         <!-- THE conversion element: 3 fields, one big button, zero handoff -->
-        <div class="mt-6 max-w-xl rounded-3xl border-2 border-brand-100 bg-white/90 p-5 shadow-xl backdrop-blur-sm sm:p-6">
+        <div class="mt-7 max-w-xl rounded-3xl border-2 border-brand-950 bg-white p-5 shadow-[8px_8px_0_0_var(--color-sun-400)] sm:p-6">
           <div class="mb-4 flex items-end gap-2.5">
             <img src="/images/sean-profile-pic-2026.webp" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-full border-2 border-white object-cover shadow" />
             <p class="bubble">
@@ -70,16 +71,16 @@ const homeFaqs = faqsFor('home').slice(0, 6);
           <HeroForm />
         </div>
 
-        <ul class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-slate-600">
-          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-brand-600">✓</span> {SITE.bbb} <span class="text-xs font-normal text-slate-400">[verify]</span></li>
-          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-brand-600">✓</span> Locally owned &amp; operated</li>
-          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-brand-600">✓</span> Buying in Columbus since {SITE.founded}</li>
+        <ul class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-brand-100">
+          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-sun-400">✓</span> {SITE.bbb} <span class="text-xs font-normal text-brand-300">[verify]</span></li>
+          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-sun-400">✓</span> Locally owned &amp; operated</li>
+          <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-sun-400">✓</span> Buying in Columbus since {SITE.founded}</li>
         </ul>
       </div>
 
       <figure class="relative mx-auto w-full max-w-sm lg:max-w-none">
         <!-- Offset frame behind the photo -->
-        <div aria-hidden="true" class="absolute -top-4 -right-4 h-full w-full rounded-3xl bg-brand-800/90 lg:-top-5 lg:-right-5"></div>
+        <div aria-hidden="true" class="absolute -top-4 -right-4 h-full w-full rotate-2 rounded-3xl bg-sun-400 lg:-top-5 lg:-right-5"></div>
         <!-- LCP element: explicit dimensions, no CLS -->
         <img
           src="/images/sean-profile-pic-2026.webp"
@@ -87,34 +88,48 @@ const homeFaqs = faqsFor('home').slice(0, 6);
           width="450"
           height="450"
           fetchpriority="high"
-          class="relative aspect-square w-full rounded-3xl border border-slate-200 object-cover shadow-xl transition-transform duration-500 hover:scale-[1.02] hover:rotate-1"
+          class="relative aspect-square w-full rounded-3xl border-2 border-brand-950 object-cover shadow-xl transition-transform duration-500 hover:scale-[1.02] hover:rotate-1"
         />
         <!-- Floating proof chips (decorative motion, reduced-motion safe) -->
-        <div class="animate-float absolute -left-4 top-8 hidden items-center gap-2 rounded-xl border border-slate-200 bg-white/95 px-3.5 py-2.5 shadow-lg sm:flex lg:-left-8" style="--float-tilt:-3deg">
+        <div class="animate-float absolute -left-4 top-8 hidden items-center gap-2 rounded-xl border-2 border-brand-950 bg-white px-3.5 py-2.5 shadow-[4px_4px_0_0_var(--color-clay-600)] sm:flex lg:-left-8" style="--float-tilt:-3deg">
           <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 text-brand-700" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
           </span>
           <span class="text-sm font-bold text-brand-950">$0 in fees.<span class="block text-xs font-medium text-slate-500">Ever. That's the deal.</span></span>
         </div>
-        <div class="animate-float-slow absolute -bottom-5 right-2 hidden items-center gap-2 rounded-xl border border-slate-200 bg-white/95 px-3.5 py-2.5 shadow-lg sm:flex lg:-right-6" style="--float-tilt:2deg">
+        <div class="animate-float-slow absolute -bottom-5 right-2 hidden items-center gap-2 rounded-xl border-2 border-brand-950 bg-white px-3.5 py-2.5 shadow-[4px_4px_0_0_var(--color-brand-500)] sm:flex lg:-right-6" style="--float-tilt:2deg">
           <span class="flex h-8 w-8 items-center justify-center rounded-full bg-clay-100 text-clay-600" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           </span>
           <span class="text-sm font-bold text-brand-950">Written offer in 24h<span class="block text-xs font-medium text-slate-500">Close in as little as 7 days</span></span>
         </div>
-        <figcaption class="mt-6 text-center text-sm text-slate-600">
-          <strong class="text-brand-900">Sean Grabow</strong> — Columbus native, founder of Sell to Sean
+        <figcaption class="mt-6 text-center text-sm text-brand-200">
+          <strong class="text-white">Sean Grabow</strong> — Columbus native, founder of Sell to Sean
         </figcaption>
       </figure>
     </div>
 
     <!-- Real-review marquee bridges hero → page -->
-    <div class="container-site pb-8">
+    <div class="container-site relative pb-8">
       <ReviewMarquee />
     </div>
   </section>
 
-  <!-- STAT BAND: the four claims that close deals, big and bold -->
+  <!-- TICKER: the deal, shouted -->
+  <div class="ticker-band" aria-hidden="true">
+    <ul class="ticker">
+      {[false, true].map((clone) => (
+        <Fragment>
+          {['No fees. Ever.', 'No repairs', 'Any condition', 'Written offer in 24 hours', 'Close in 7 days', 'Local since 2018'].map((item) => (
+            <li aria-hidden={clone ? 'true' : undefined}><span class="text-clay-600">✦</span> {item}</li>
+          ))}
+        </Fragment>
+      ))}
+    </ul>
+  </div>
+  <p class="sr-only">No fees ever. No repairs. Any condition. Written offer in 24 hours. Close in 7 days. Local since 2018.</p>
+
+  <!-- STAT BAND: the four claims that close deals, big, bold, counting up -->
   <section class="border-b border-slate-200 bg-white" aria-label="Key facts">
     <div class="container-site border-b border-slate-100 py-6">
       <AsSeenOn />
@@ -122,13 +137,19 @@ const homeFaqs = faqsFor('home').slice(0, 6);
     <div class="container-site grid grid-cols-2 gap-x-4 gap-y-8 py-10 text-center md:grid-cols-4">
       {
         [
-          ['$0', 'fees or commissions — the offer is what you get'],
-          ['24 hrs', 'to a written cash offer, usually'],
-          ['7 days', 'fastest closing — or pick your date'],
-          ['2018', 'buying Columbus houses since'],
-        ].map(([stat, label], i) => (
+          ['$0', null, null, 'fees or commissions — the offer is what you get'],
+          ['24', 24, ' hrs', 'to a written cash offer, usually'],
+          ['7', 7, ' days', 'fastest closing — or pick your date'],
+          ['2018', 2018, '', 'buying Columbus houses since'],
+        ].map(([stat, count, suffix, label], i) => (
           <div class="reveal" style={`--reveal-delay:${i * 90}ms`}>
-            <p class="font-display text-4xl font-bold text-brand-800 sm:text-5xl">{stat}</p>
+            <p
+              class="font-display text-4xl font-bold text-brand-800 sm:text-5xl"
+              data-count={count ?? undefined}
+              data-suffix={suffix ?? undefined}
+            >
+              {stat}{suffix}
+            </p>
             <p class="mx-auto mt-2 max-w-[16ch] text-sm leading-snug text-slate-600">{label}</p>
           </div>
         ))
@@ -283,10 +304,12 @@ const homeFaqs = faqsFor('home').slice(0, 6);
 
   <CTASection formId="home-cta-form" />
 
-  <!-- Rotating pain-point word in the hero sub (layout-stable, reduced-motion aware) -->
+  <!-- Rotating pain-point word + stat count-up (layout-stable, reduced-motion aware) -->
   <script>
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const rot = document.querySelector('.rotator');
-    if (rot && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (rot && !reduced) {
       const words = Array.from(rot.children);
       let i = 0;
       setInterval(() => {
@@ -294,6 +317,31 @@ const homeFaqs = faqsFor('home').slice(0, 6);
         i = (i + 1) % words.length;
         words[i].classList.add('is-on');
       }, 2400);
+    }
+
+    // Stats count up when they scroll into view
+    const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+    if (counters.length && !reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          io.unobserve(e.target);
+          const el = e.target as HTMLElement;
+          const target = Number(el.dataset.count);
+          const suffix = el.dataset.suffix || '';
+          const from = target > 100 ? target - 35 : 0; // years roll, small numbers count
+          const t0 = performance.now();
+          const dur = 1100;
+          const tick = (t: number) => {
+            const p = Math.min((t - t0) / dur, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = String(Math.round(from + (target - from) * eased)) + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      }, { threshold: 0.6 });
+      counters.forEach((c) => io.observe(c));
     }
   </script>
 </BaseLayout>
