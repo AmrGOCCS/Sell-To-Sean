@@ -5,25 +5,38 @@ const steps = [
   {
     title: 'Tell us about your house',
     body: `Start with just the address — it takes about 2 minutes. Sean or a team member calls you within ${SITE.callbackPromise} to hear your situation. No pressure, no scripts.`,
+    icon: 'M3 10.5 12 3l9 7.5M5 9.5V21h5v-6h4v6h5V9.5', // house
   },
   {
     title: 'Get your written cash offer',
     body: 'We do a quick walkthrough — in person, or from photos if you\'re out of town — and put a fair cash offer in writing, usually within 24 hours. We\'ll show you how we got to the number.',
+    icon: 'M7 3h7l4 4v14H7zM14 3v4h4M10 12h5M10 16h5', // document
   },
   {
     title: 'Pick your closing date',
     body: 'Close in as little as 7 days, or take the time you need. We close at a licensed Ohio title company, and you walk away with your money. No fees come out of it.',
+    icon: 'M5 5h14v15H5zM5 9h14M9 3v4M15 3v4M9 14l2 2 4-4', // calendar-check
   },
 ];
 ---
 
-<ol class="grid gap-6 md:grid-cols-3">
+<ol class="relative grid gap-6 md:grid-cols-3 md:gap-8">
+  <!-- Connector line between steps (desktop) -->
+  <div aria-hidden="true" class="absolute top-12 right-[12%] left-[12%] hidden border-t-2 border-dashed border-pine-200 md:block"></div>
+
   {
     steps.map((step, i) => (
-      <li class="card relative">
-        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-pine-700 font-display text-xl font-bold text-white" aria-hidden="true">
-          {i + 1}
-        </span>
+      <li class="card card-lift reveal relative" style={`--reveal-delay:${i * 120}ms`}>
+        <div class="flex items-center gap-3">
+          <span class="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-pine-600 to-pine-800 text-white shadow-md" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d={step.icon} />
+            </svg>
+            <span class="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-clay-500 font-display text-sm font-bold text-white shadow">
+              {i + 1}
+            </span>
+          </span>
+        </div>
         <h3 class="mt-4 text-xl">{step.title}</h3>
         <p class="mt-2 leading-relaxed text-stone-600">{step.body}</p>
       </li>

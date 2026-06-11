@@ -2,11 +2,13 @@
 
 /* ============================================================
    DESIGN SYSTEM — Sell to Sean
-   Warm, human, local. Fintech-level polish, zero yellow-sign.
+   Warm, human, local — with modern fintech-level polish.
    - Pine: brand green (trust, continuity with current brand)
    - Clay: warm CTA orange (AA contrast with white at 600+)
    - Cream/stone: warm neutrals (never cold gray)
    Type: Lora (headings, warm editorial) + Inter (UI/body)
+   Motion: transform/opacity only (no CLS), JS-gated reveals,
+   fully disabled under prefers-reduced-motion.
    ============================================================ */
 
 @theme {
@@ -38,24 +40,47 @@
   --font-display: 'Lora Variable', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* Fluid type scale (minor third on desktop, tighter on mobile) */
-  --text-display: clamp(2.125rem, 1.5rem + 2.8vw, 3.25rem);
+  /* Fluid type scale */
+  --text-display: clamp(2.25rem, 1.5rem + 3.2vw, 3.625rem);
   --text-h2: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
   --text-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+
+  --shadow-glow-clay: 0 8px 30px -6px rgba(194, 65, 12, 0.45);
+  --shadow-card: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px -12px rgba(28, 25, 23, 0.12);
+  --shadow-card-hover: 0 2px 4px rgba(28, 25, 23, 0.05), 0 18px 40px -16px rgba(28, 25, 23, 0.22);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite reverse;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-step-in: step-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes step-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.8); }
+}
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
   }
   body {
     @apply bg-cream font-sans text-stone-800 antialiased;
@@ -70,21 +95,46 @@
     outline-offset: 2px;
     border-radius: 4px;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
   .container-site {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
-  /* Primary CTA: 48px+ touch target, AA contrast (#c2410c on white = 4.8:1) */
+
+  /* Primary CTA: gradient, glow, shine sweep on hover. 48px+ touch target,
+     AA contrast (white on #c2410c = 4.8:1). */
   .btn-primary {
-    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl bg-clay-600 px-6 py-3 text-base font-semibold text-white shadow-md transition hover:bg-clay-700 active:scale-[0.98];
+    @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3 text-base font-semibold text-white transition-all duration-200;
+    background-image: linear-gradient(135deg, var(--color-clay-500), var(--color-clay-600) 55%, var(--color-clay-700));
+    box-shadow: var(--shadow-glow-clay);
   }
+  .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); }
+  .btn-primary:active { transform: translateY(0) scale(0.98); }
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.28) 50%, transparent 62%);
+    transform: translateX(-110%);
+    transition: transform 0.55s ease;
+  }
+  .btn-primary:hover::after { transform: translateX(110%); }
+
   .btn-secondary {
-    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-pine-700 px-6 py-3 text-base font-semibold text-pine-800 transition hover:bg-pine-50;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-pine-700 bg-white/70 px-6 py-3 text-base font-semibold text-pine-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:bg-pine-50;
   }
+
   .field-input {
-    @apply min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-base text-stone-900 placeholder:text-stone-400;
+    @apply min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-base text-stone-900 transition-shadow placeholder:text-stone-400 focus:border-pine-500 focus:shadow-[0_0_0_4px_rgba(46,140,103,0.15)];
   }
   .field-input[aria-invalid='true'] {
     @apply border-2 border-red-600;
@@ -97,24 +147,95 @@
   }
   .field-error.is-visible {
     @apply block;
+    animation: fade-down 0.25s ease both;
   }
+
   /* One-tap choice chips for form steps 2 & 3 */
   .chip-option {
-    @apply flex min-h-14 w-full cursor-pointer items-center justify-between rounded-xl border-2 border-stone-200 bg-white px-4 py-3 text-left text-base font-medium text-stone-800 transition hover:border-pine-500;
+    @apply flex min-h-14 w-full cursor-pointer items-center justify-between rounded-xl border-2 border-stone-200 bg-white px-4 py-3 text-left text-base font-medium text-stone-800 transition-all duration-150 hover:-translate-y-0.5 hover:border-pine-500 hover:shadow-md;
   }
   .chip-option:has(input:checked) {
-    @apply border-pine-700 bg-pine-50 text-pine-900;
+    @apply border-pine-700 bg-pine-50 text-pine-900 shadow-[0_0_0_4px_rgba(46,140,103,0.12)];
   }
+
   .card {
-    @apply rounded-2xl border border-stone-200 bg-white p-6 shadow-sm;
+    @apply rounded-2xl border border-stone-200 bg-white p-6;
+    box-shadow: var(--shadow-card);
   }
+  .card-lift {
+    @apply transition-all duration-300;
+  }
+  .card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
   .eyebrow {
     @apply mb-2 block text-sm font-bold tracking-widest text-pine-600 uppercase;
   }
+  /* Pill eyebrow with live pulse dot */
+  .eyebrow-pill {
+    @apply mb-4 inline-flex items-center gap-2 rounded-full border border-pine-200 bg-white/80 px-4 py-1.5 text-xs font-bold tracking-widest text-pine-700 uppercase shadow-sm backdrop-blur;
+  }
+  .eyebrow-pill::before {
+    content: '';
+    @apply h-2 w-2 rounded-full bg-clay-500;
+    animation: var(--animate-pulse-dot);
+  }
+
+  /* Highlighted word in headlines: warm marker underline */
+  .hl {
+    @apply relative whitespace-nowrap;
+    background-image: linear-gradient(120deg, rgba(246, 170, 123, 0.55), rgba(241, 125, 69, 0.45));
+    background-repeat: no-repeat;
+    background-size: 100% 0.4em;
+    background-position: 0 88%;
+    border-radius: 2px;
+  }
+
+  /* Decorative gradient blobs (pure CSS, aria-hidden containers) */
+  .blob {
+    @apply pointer-events-none absolute rounded-full;
+    filter: blur(70px);
+    opacity: 0.55;
+  }
+
+  /* Testimonial marquee */
+  .marquee {
+    @apply flex w-max gap-4;
+    animation: var(--animate-marquee);
+  }
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .marquee-mask:hover .marquee { animation-play-state: paused; }
+
   .prose-site h2 { @apply mt-10 mb-4 text-2xl; }
   .prose-site h3 { @apply mt-8 mb-3 text-xl; }
   .prose-site p, .prose-site li { @apply mb-4 text-base leading-relaxed text-stone-700; }
   .prose-site ul { @apply mb-4 list-disc pl-6; }
   .prose-site ol { @apply mb-4 list-decimal pl-6; }
   .prose-site a { @apply font-semibold text-pine-700 underline; }
+}
+
+@layer utilities {
+  /* Scroll-reveal: JS-gated (html.js) so content is always visible without JS.
+     Transform/opacity only — zero layout shift. */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .reveal { opacity: 1; transform: none; }
+  }
+
+  .animate-float { animation: var(--animate-float); }
+  .animate-float-slow { animation: var(--animate-float-slow); }
+  .step-animate { animation: var(--animate-step-in); }
 }

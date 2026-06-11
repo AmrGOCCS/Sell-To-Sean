@@ -14,8 +14,18 @@ const {
 } = Astro.props;
 ---
 
-<section class="bg-pine-950 py-14 sm:py-20" aria-labelledby="final-cta-heading">
-  <div class="container-site grid items-center gap-10 lg:grid-cols-2">
+<section class="relative overflow-hidden bg-pine-950 py-14 sm:py-20" aria-labelledby="final-cta-heading">
+  <!-- Glow + grain for depth on the dark band -->
+  <div aria-hidden="true" class="absolute inset-0">
+    <div class="blob -top-32 left-1/4 h-96 w-96 bg-pine-600 opacity-40"></div>
+    <div class="blob -right-24 -bottom-32 h-96 w-96 bg-clay-600 opacity-25"></div>
+    <div
+      class="absolute inset-0 opacity-[0.18]"
+      style="background-image: radial-gradient(rgba(250,247,241,0.35) 1px, transparent 1px); background-size: 30px 30px;"
+    >
+    </div>
+  </div>
+  <div class="container-site relative grid items-center gap-10 lg:grid-cols-2">
     <div>
       <h2 id="final-cta-heading" class="!text-white" style="font-size: var(--text-h2)">{heading}</h2>
       <p class="mt-4 text-lg leading-relaxed text-pine-100">{sub}</p>

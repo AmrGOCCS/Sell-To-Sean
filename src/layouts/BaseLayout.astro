@@ -50,6 +50,7 @@ const allSchemas = [localBusinessSchema(), websiteSchema(), ...schemas];
          at launch (deferred, after consent) — see LAUNCH-CHECKLIST.md -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
+      document.documentElement.classList.add('js'); // gates scroll-reveal CSS
     </script>
   </head>
   <body class="flex min-h-screen flex-col">
@@ -64,6 +65,28 @@ const allSchemas = [localBusinessSchema(), websiteSchema(), ...schemas];
     </main>
     <Footer />
     {!noStickyCta && <StickyCTA />}
+
+    <!-- Scroll-reveal: adds .is-visible as sections enter the viewport.
+         CSS is gated on html.js, so content is fully visible without JS. -->
+    <script>
+      const els = document.querySelectorAll('.reveal');
+      if (els.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
 
     <!-- Capture ad-click attribution on landing so the form can submit it later.
          Mirrors the hidden fields on the current site (utm_*, gclid, fbclid…). -->

@@ -33,7 +33,11 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
         <span data-step-count>25%</span>
       </div>
       <div class="h-2 rounded-full bg-stone-200" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="Form progress">
-        <div data-progress class="h-2 w-1/4 rounded-full bg-pine-600 transition-all duration-300"></div>
+        <div
+          data-progress
+          class="h-2 w-1/4 rounded-full bg-gradient-to-r from-pine-500 to-pine-700 shadow-[0_0_10px_rgba(46,140,103,0.5)] transition-all duration-500 ease-out"
+        >
+        </div>
       </div>
     </div>
 
@@ -220,7 +224,10 @@ const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
     } catch (e) {}
 
     function show(i: number) {
-      steps.forEach((s, idx) => (s.hidden = idx !== i));
+      steps.forEach((s, idx) => {
+        s.hidden = idx !== i;
+        s.classList.toggle('step-animate', idx === i);
+      });
       current = i;
       const pct = ((i + 1) / steps.length) * 100;
       progress.style.width = pct + '%';

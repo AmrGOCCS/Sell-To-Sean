@@ -11,7 +11,7 @@ const nav = [
 const current = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 border-b border-stone-200 bg-cream/95 backdrop-blur">
+<header id="site-header" class="sticky top-0 z-40 border-b border-stone-200/60 bg-cream/85 backdrop-blur-md transition-shadow duration-300">
   <div class="container-site flex h-16 items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-2" aria-label="Sell to Sean — home">
       <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
@@ -28,8 +28,8 @@ const current = Astro.url.pathname;
             href={item.href}
             aria-current={current === item.href ? 'page' : undefined}
             class:list={[
-              'text-sm font-semibold text-stone-700 hover:text-pine-800',
-              current === item.href && 'text-pine-800 underline underline-offset-8',
+              'nav-link relative text-sm font-semibold text-stone-700 transition-colors hover:text-pine-800',
+              current === item.href && 'is-current text-pine-800',
             ]}
           >
             {item.label}
@@ -79,6 +79,30 @@ const current = Astro.url.pathname;
   </nav>
 </header>
 
+<style>
+  /* Animated underline that grows from the left on hover/current */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2.5px;
+    width: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-clay-500), var(--color-pine-600));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-link:hover::after,
+  .nav-link.is-current::after {
+    transform: scaleX(1);
+  }
+  #site-header.is-scrolled {
+    box-shadow: 0 6px 24px -12px rgba(28, 25, 23, 0.18);
+  }
+</style>
+
 <script>
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-nav');
@@ -87,4 +111,7 @@ const current = Astro.url.pathname;
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
+
+  const header = document.getElementById('site-header');
+  addEventListener('scroll', () => header?.classList.toggle('is-scrolled', scrollY > 8), { passive: true });
 </script>
