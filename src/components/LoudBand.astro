@@ -1,0 +1,33 @@
+---
+/**
+ * Full-width "loud" mid-page CTA band — impossible to scroll past quietly.
+ */
+import { SITE } from '../data/site.js';
+
+interface Props {
+  heading?: string;
+  sub?: string;
+}
+const {
+  heading = 'Curious what your house is worth in cash?',
+  sub = "Finding out is free, takes 2 minutes, and you don't have to do anything with the answer.",
+} = Astro.props;
+---
+
+<aside class="relative overflow-hidden bg-gradient-to-r from-clay-600 via-clay-500 to-clay-600" aria-label="Get your cash offer">
+  <div aria-hidden="true" class="absolute inset-0 opacity-20" style="background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 22px 22px;"></div>
+  <div class="container-site relative flex flex-col items-center gap-5 py-10 text-center sm:py-12 lg:flex-row lg:justify-between lg:text-left">
+    <div>
+      <p class="font-display text-2xl font-bold text-white sm:text-3xl">👋 {heading}</p>
+      <p class="mt-1.5 max-w-xl text-base text-clay-100">{sub}</p>
+    </div>
+    <div class="flex shrink-0 flex-col items-center gap-2.5 sm:flex-row">
+      <a href="/get-offer/" class="btn-xl inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-white px-8 py-4 text-lg font-bold text-clay-700 shadow-xl transition hover:-translate-y-0.5 hover:bg-clay-50" data-track="cta_click" data-loc="loud_band">
+        Get My Cash Offer <span aria-hidden="true">→</span>
+      </a>
+      <a href={SITE.phoneHref} class="text-sm font-bold text-white underline underline-offset-4 hover:text-clay-100" data-track="phone_click" data-loc="loud_band">
+        or call {SITE.phone}
+      </a>
+    </div>
+  </div>
+</aside>

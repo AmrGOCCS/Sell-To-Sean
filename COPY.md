@@ -22,9 +22,16 @@ situations) in `src/data/*`.
 
 - **Title tag:** Sell Your House Fast in Columbus, OH — Cash Offer in 24 Hours | Sell to Sean
 - **Meta description:** Get a fair, written cash offer on your Columbus house in 24 hours. No fees, no repairs, no obligation. Local buyer since 2018 — close in as little as 7 days.
-- **Eyebrow:** Columbus' Favorite Homebuyer Since 2018
-- **H1:** Get a fair cash offer on your Columbus house in 24 hours.
-- **Sub:** No fees. No repairs. No obligation. Sell as-is and close in as little as 7 days — on your timeline, with a local buyer you can actually meet.
+- **Eyebrow pill (with Sean's avatar):** Hi, I'm Sean 👋 — Columbus' favorite homebuyer since 2018
+- **H1:** Sell your house the easy way — cash offer in 24 hours.
+- **Sub:** No fees. No repairs. No strangers wandering through your living room. Tell us about the house and Sean brings you a fair, **written** cash offer — usually by tomorrow.
+- **Hero quick form (THE conversion element — address + phone + email in one card):**
+  - Card heading: "Get your free cash offer 👇" · "Takes 2 minutes. No obligation — just a real number."
+  - Button: "Get My Cash Offer →" (XL, pulsing glow)
+  - Microcopy: "Free · No obligation · 🔒 Your info goes to Sean only — never sold"
+- **Mid-page loud bands (clay gradient, white XL button):**
+  1. "👋 Curious what your house is worth in cash?" / "Finding out is free, takes 2 minutes, and you don't have to do anything with the answer."
+  2. "👋 Still scrolling? Your offer is one form away." / "Address, phone, email — that's all Sean needs to get started on your number."
 - **Trust strip:** BBB A+ Rated `[VERIFY]` · Locally owned & operated · Buying in Columbus since 2018
 - **Situations band H2:** Whatever brought you here, we've helped someone through it.
   - Body: Most people don't sell to a cash buyer because everything is going great. Behind on payments, a house you inherited, tenants you're done with — there's a page for your situation, with straight answers and a story from someone who's been there.

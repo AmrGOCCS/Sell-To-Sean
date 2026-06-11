@@ -14,7 +14,7 @@ import { SITE } from '../data/site.js';
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
       Call Sean
     </a>
-    <a href="/get-offer/" class="btn-primary flex-1 !px-3 text-sm" data-track="cta_click" data-loc="sticky_bar">{SITE.cta}</a>
+    <a href="/get-offer/" class="btn-primary btn-pulse flex-[1.5] !px-3 text-sm font-bold" data-track="cta_click" data-loc="sticky_bar">{SITE.cta} →</a>
   </div>
 </div>
 
@@ -22,7 +22,7 @@ import { SITE } from '../data/site.js';
   const bar = document.getElementById('sticky-cta');
   if (bar) {
     bar.classList.remove('hidden');
-    const forms = document.querySelectorAll('[data-lead-form], [data-hero-form]');
+    const forms = document.querySelectorAll('[data-lead-form], [data-quick-form]');
     let pastHero = false;
     let formVisible = false;
     const update = () => {

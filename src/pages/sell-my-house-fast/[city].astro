@@ -44,7 +44,11 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug);
         repairs, no obligation. Sell to Sean is a local buyer based in Columbus, buying across
         {city.county} since {SITE.founded}.
       </p>
-      <div class="mt-7 max-w-xl"><HeroForm /></div>
+      <div class="mt-7 max-w-xl rounded-3xl border-2 border-pine-100 bg-white/90 p-5 shadow-xl backdrop-blur-sm sm:p-6">
+        <p class="mb-1 font-display text-xl font-bold text-pine-950">Get your free cash offer 👇</p>
+        <p class="mb-4 text-sm text-stone-600">Takes 2 minutes. No obligation — just a real number.</p>
+        <HeroForm />
+      </div>
     </div>
   </section>
 

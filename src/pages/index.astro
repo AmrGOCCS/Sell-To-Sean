@@ -8,6 +8,7 @@ import TestimonialCards from '../components/TestimonialCards.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
 import CTASection from '../components/CTASection.astro';
 import ReviewMarquee from '../components/ReviewMarquee.astro';
+import LoudBand from '../components/LoudBand.astro';
 import { SITE } from '../data/site.js';
 import { FEATURED_REVIEWS } from '../data/reviews.js';
 import { faqsFor } from '../data/faqs.js';
@@ -36,18 +37,27 @@ const homeFaqs = faqsFor('home').slice(0, 6);
 
     <div class="container-site grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
       <div>
-        <span class="eyebrow-pill">{SITE.tagline}</span>
+        <span class="eyebrow-pill !normal-case !tracking-normal">
+          <img src="/images/sean-profile-pic-2026.webp" alt="" width="24" height="24" class="-ml-1 h-6 w-6 rounded-full object-cover" />
+          Hi, I'm Sean 👋 — Columbus' favorite homebuyer since {SITE.founded}
+        </span>
         <h1 style="font-size: var(--text-display)" class="leading-[1.08]">
-          Get a fair cash offer on your Columbus house <span class="hl">in 24 hours</span>.
+          Sell your house the <span class="hl">easy way</span> — cash offer in 24 hours.
         </h1>
         <p class="mt-5 max-w-xl text-lg leading-relaxed text-stone-700">
-          No fees. No repairs. No obligation. Sell as-is and close in as little as 7 days — on
-          your timeline, with a local buyer you can actually meet.
+          No fees. No repairs. No strangers wandering through your living room. Tell us about
+          the house and Sean brings you a fair, <strong>written</strong> cash offer — usually by
+          tomorrow.
         </p>
-        <div class="mt-7 max-w-xl rounded-2xl border border-stone-200/80 bg-white/70 p-4 shadow-lg backdrop-blur-sm sm:p-5">
+
+        <!-- THE conversion element: 3 fields, one big button, zero handoff -->
+        <div class="mt-7 max-w-xl rounded-3xl border-2 border-pine-100 bg-white/90 p-5 shadow-xl backdrop-blur-sm sm:p-6">
+          <p class="mb-1 font-display text-xl font-bold text-pine-950">Get your free cash offer 👇</p>
+          <p class="mb-4 text-sm text-stone-600">Takes 2 minutes. No obligation — just a real number.</p>
           <HeroForm />
         </div>
-        <ul class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-stone-600">
+
+        <ul class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-stone-600">
           <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-pine-600">✓</span> {SITE.bbb} <span class="text-xs font-normal text-stone-400">[verify]</span></li>
           <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-pine-600">✓</span> Locally owned &amp; operated</li>
           <li class="flex items-center gap-1.5"><span aria-hidden="true" class="text-pine-600">✓</span> Buying in Columbus since {SITE.founded}</li>
@@ -152,6 +162,8 @@ const homeFaqs = faqsFor('home').slice(0, 6);
     </div>
   </section>
 
+  <LoudBand />
+
   <!-- OFFER MATH -->
   <section class="py-14 sm:py-20" aria-labelledby="math-heading">
     <div class="container-site">
@@ -226,7 +238,7 @@ const homeFaqs = faqsFor('home').slice(0, 6);
     <div class="container-site">
       <div class="mb-8 text-center">
         <span class="eyebrow">Questions everyone asks</span>
-        <h2 id="faq-heading" style="font-size: var(--text-h2)">Asked and answered.</h2>
+        <h2 id="faq-heading" style="font-size: var(--text-h2)">Good questions. Honest answers. 🤝</h2>
       </div>
       <FAQAccordion faqs={homeFaqs} />
       <p class="mt-6 text-center">
@@ -234,6 +246,8 @@ const homeFaqs = faqsFor('home').slice(0, 6);
       </p>
     </div>
   </section>
+
+  <LoudBand heading="Still scrolling? Your offer is one form away." sub="Address, phone, email — that's all Sean needs to get started on your number." />
 
   <!-- SERVICE AREA / internal links -->
   <section class="border-t border-stone-200 py-10" aria-labelledby="area-heading">

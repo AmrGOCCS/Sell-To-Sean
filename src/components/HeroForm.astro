@@ -1,32 +1,178 @@
 ---
 /**
- * Address-only hero form (Express Homebuyers pattern). GETs to /get-offer/
- * where the multi-step form picks up with the address prefilled — the visitor
- * has already micro-committed by typing their address.
+ * QUICK CAPTURE form — the loudest conversion path on the site.
+ * Three fields (address, phone, email) + required TCPA consent, submitted
+ * directly from the hero: no handoff, no extra steps. Same payload shape and
+ * webhook as the multi-step LeadForm, with variant tagging for A/B analysis.
  */
+const webhookUrl = import.meta.env.PUBLIC_LEAD_WEBHOOK_URL || '';
 ---
 
-<form action="/get-offer/" method="get" class="flex flex-col gap-2.5 sm:flex-row" data-hero-form>
-  <label class="sr-only" for="hero-address">Property street address</label>
-  <input
-    id="hero-address"
-    class="field-input flex-1 shadow-md"
-    type="text"
-    name="address"
-    autocomplete="street-address"
-    placeholder="Enter your property address"
-    required
-  />
-  <button type="submit" class="btn-primary shadow-lg sm:px-7">Get My Cash Offer</button>
+<form data-quick-form data-webhook={webhookUrl} novalidate class="space-y-3">
+  <div>
+    <label class="sr-only" for="quick-address">Property street address</label>
+    <input
+      id="quick-address"
+      class="field-input !min-h-13 !text-base"
+      type="text"
+      name="street_address"
+      autocomplete="street-address"
+      placeholder="🏠  Property address"
+      required
+      data-error-msg="Where's the house? We need the address to build your offer."
+    />
+    <p class="field-error" role="alert"></p>
+  </div>
+  <div class="grid gap-3 sm:grid-cols-2">
+    <div>
+      <label class="sr-only" for="quick-phone">Phone number</label>
+      <input
+        id="quick-phone"
+        class="field-input !min-h-13 !text-base"
+        type="tel"
+        name="phone"
+        autocomplete="tel"
+        inputmode="tel"
+        placeholder="📞  Phone number"
+        required
+        data-phone-mask
+        data-error-msg="A 10-digit phone number lets us deliver your offer."
+      />
+      <p class="field-error" role="alert"></p>
+    </div>
+    <div>
+      <label class="sr-only" for="quick-email">Email</label>
+      <input
+        id="quick-email"
+        class="field-input !min-h-13 !text-base"
+        type="email"
+        name="email"
+        autocomplete="email"
+        placeholder="✉️  Email"
+        required
+        data-error-msg="We'll email the written offer here."
+      />
+      <p class="field-error" role="alert"></p>
+    </div>
+  </div>
+
+  <!-- TCPA consent (required). [HAVE ATTORNEY REVIEW] — see LAUNCH-CHECKLIST -->
+  <div>
+    <label class="flex cursor-pointer gap-2 text-left text-[11px] leading-snug text-stone-500">
+      <input type="checkbox" name="consent_transactional" value="yes" required class="mt-0.5 h-4 w-4 shrink-0 accent-pine-700" data-error-msg="Check the box so we're allowed to contact you about your offer." />
+      <span>
+        I agree that Central City Solutions LLC d/b/a Sell to Sean may call, text, and email me
+        about my property inquiry (my offer, questions, appointments). Msg frequency varies;
+        msg &amp; data rates may apply; reply STOP to opt out.
+        <a href="/terms/" class="underline">Terms</a> · <a href="/privacy/" class="underline">Privacy</a>
+      </span>
+    </label>
+    <p class="field-error" role="alert"></p>
+  </div>
+
+  <!-- Ad attribution + honeypot -->
+  {['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','campaignid','uid','landing_page'].map((k) => (
+    <input type="hidden" name={k} />
+  ))}
+  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+
+  <button type="submit" class="btn-primary btn-xl btn-pulse w-full">
+    Get My Cash Offer
+    <span aria-hidden="true">→</span>
+  </button>
+  <p class="text-center text-xs font-medium text-stone-500">
+    Free · No obligation · 🔒 Your info goes to Sean only — never sold
+  </p>
 </form>
-<p class="mt-2.5 text-sm text-stone-600">
-  Takes about 2 minutes · No fees · No obligation · Your info stays private
-</p>
 
 <script>
-  document.querySelectorAll('[data-hero-form]').forEach((form) => {
-    form.addEventListener('submit', () => {
-      (window as any).dataLayer.push({ event: 'form_start', form_location: location.pathname, variant: 'hero_address' });
+  function initQuickForm(form: HTMLFormElement) {
+    const dl = (event: string, extra: Record<string, unknown> = {}) =>
+      (window as any).dataLayer.push({ event, form_location: location.pathname, variant: 'hero_quick', ...extra });
+
+    try {
+      const attr = JSON.parse(sessionStorage.getItem('sts_attribution') || '{}');
+      Object.entries(attr).forEach(([k, v]) => {
+        const input = form.querySelector<HTMLInputElement>(`input[type="hidden"][name="${k}"]`);
+        if (input) input.value = String(v);
+      });
+    } catch (e) {}
+
+    let started = false;
+    form.addEventListener('input', () => {
+      if (!started) { started = true; dl('form_start'); }
     });
-  });
+
+    form.querySelectorAll<HTMLInputElement>('[data-phone-mask]').forEach((input) => {
+      input.addEventListener('input', () => {
+        const d = input.value.replace(/\D/g, '').slice(0, 10);
+        let out = d;
+        if (d.length > 6) out = `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+        else if (d.length > 3) out = `(${d.slice(0, 3)}) ${d.slice(3)}`;
+        else if (d.length > 0) out = `(${d}`;
+        input.value = out;
+      });
+    });
+
+    function setError(field: HTMLInputElement, msg: string) {
+      // Each field (and the consent block) is wrapped in a <div> that owns a .field-error
+      const err = field.closest('form > div, form > div > div')?.querySelector('.field-error');
+      if (err) { err.textContent = msg; err.classList.add('is-visible'); }
+      field.setAttribute('aria-invalid', 'true');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      form.querySelectorAll('.field-error').forEach((el) => { el.textContent = ''; el.classList.remove('is-visible'); });
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+
+      let ok = true;
+      form.querySelectorAll<HTMLInputElement>('input[required]').forEach((input) => {
+        let valid = input.value.trim().length > 1;
+        if (input.type === 'email') valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value.trim());
+        if (input.type === 'tel') valid = input.value.replace(/\D/g, '').length === 10;
+        if (input.type === 'checkbox') valid = input.checked;
+        if (!valid) { ok = false; setError(input, input.dataset.errorMsg || 'This field is required.'); }
+      });
+      if (!ok) return;
+      if ((form.querySelector('[name="website"]') as HTMLInputElement)?.value) return; // bot
+
+      const btn = form.querySelector<HTMLButtonElement>('[type="submit"]')!;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const payload: Record<string, string> = {
+        submitted_at: new Date().toISOString(),
+        source_page: location.pathname,
+        form_variant: 'hero_quick',
+      };
+      new FormData(form).forEach((v, k) => { if (k !== 'website') payload[k] = String(v); });
+      dl('form_submit');
+
+      try {
+        const webhook = form.dataset.webhook;
+        if (webhook) {
+          const res = await fetch(webhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error('Webhook responded ' + res.status);
+        } else {
+          console.info('[Sell to Sean] No PUBLIC_LEAD_WEBHOOK_URL configured. Lead payload:', payload);
+        }
+        location.assign('/thank-you/');
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = 'Get My Cash Offer <span aria-hidden="true">→</span>';
+        const errEl = form.querySelector('.field-error');
+        if (errEl) {
+          errEl.textContent = 'Something glitched on our end. Call us instead — (614) 412-1601 — or try once more.';
+          errEl.classList.add('is-visible');
+        }
+      }
+    });
+  }
+
+  document.querySelectorAll<HTMLFormElement>('[data-quick-form]').forEach(initQuickForm);
 </script>
