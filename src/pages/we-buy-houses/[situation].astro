@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
 import TestimonialCards from '../../components/TestimonialCards.astro';
 import FAQAccordion from '../../components/FAQAccordion.astro';
 import CTASection from '../../components/CTASection.astro';
@@ -29,27 +30,25 @@ const others = SITUATIONS.filter((s) => s.slug !== situation.slug);
     ]),
   ]}
 >
-  <section class="border-b border-slate-200 bg-gradient-to-b from-ice to-cream py-12 sm:py-16">
-    <div class="container-site max-w-3xl">
-      <nav aria-label="Breadcrumb" class="mb-4 text-sm text-slate-500">
-        <a href="/" class="underline hover:text-brand-700">Home</a>
-        <span aria-hidden="true"> / </span>
-        <span aria-current="page">{situation.title}</span>
-      </nav>
-      <h1 style="font-size: var(--text-display)">{situation.h1}</h1>
+  <PageHero>
+    <nav slot="top" aria-label="Breadcrumb" class="mb-4 text-sm text-brand-300">
+      <a href="/" class="text-white underline">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">{situation.title}</span>
+    </nav>
+    <Fragment slot="title"><span aria-hidden="true" class="mr-1">{situation.emoji}</span> {situation.h1}</Fragment>
 
-      <!-- GEO answer-first block: direct, quotable, factual -->
-      <p class="mt-5 rounded-2xl border-l-4 border-brand-600 bg-white p-5 text-lg leading-relaxed text-slate-800 shadow-sm">
-        {situation.answerFirst}
-      </p>
+    <!-- GEO answer-first block: direct, quotable, factual -->
+    <p class="card-pop reveal mt-2 !border-l-8 !border-l-sun-400 text-lg leading-relaxed !text-slate-800">
+      {situation.answerFirst}
+    </p>
 
-      <div class="mt-7 flex flex-wrap gap-3">
-        <a href="/get-offer/" class="btn-primary">{SITE.cta}</a>
-        <a href={SITE.phoneHref} class="btn-secondary" data-track="phone_click" data-loc={`situation_${situation.slug}`}>Call {SITE.phone}</a>
-      </div>
-      <p class="mt-3 text-sm text-slate-600">Free · Confidential · No obligation</p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a href="/get-offer/" class="btn-primary btn-shine !no-underline">{SITE.cta} <span aria-hidden="true" class="animate-bounce-x">→</span></a>
+      <a href={SITE.phoneHref} class="btn-secondary !border-white !bg-white/10 !text-white !no-underline hover:!bg-white/20" data-track="phone_click" data-loc={`situation_${situation.slug}`}>Call {SITE.phone}</a>
     </div>
-  </section>
+    <p class="mt-3 text-sm text-brand-200">Free · Confidential · No obligation</p>
+  </PageHero>
 
   <section class="py-14 sm:py-20">
     <div class="prose-site container-site max-w-3xl">

@@ -1,0 +1,32 @@
+---
+/**
+ * Dark, high-energy hero for inner pages — matches the homepage hero
+ * (navy canvas, drifting blobs, white dot grid). Title and sub-content
+ * come in via slots so pages can use sticker words, breadcrumbs, CTAs.
+ */
+interface Props {
+  eyebrow?: string;
+  wide?: boolean; // max-w-3xl by default; wide for grid layouts
+}
+const { eyebrow, wide = false } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-brand-950 py-12 sm:py-16">
+  <div aria-hidden="true" class="absolute inset-0">
+    <div class="blob animate-blob -top-24 -right-24 h-80 w-80 bg-brand-500 opacity-40"></div>
+    <div class="blob animate-blob -bottom-24 -left-16 h-72 w-72 bg-clay-500 opacity-25" style="animation-delay:-6s"></div>
+    <div
+      class="absolute inset-0 opacity-[0.18]"
+      style="background-image: radial-gradient(rgba(247,250,255,0.5) 1px, transparent 1px); background-size: 26px 26px;"
+    >
+    </div>
+  </div>
+  <div class:list={['container-site relative', !wide && 'max-w-3xl']}>
+    <slot name="top" />
+    {eyebrow && <span class="eyebrow !text-sun-300">{eyebrow}</span>}
+    <h1 class="!text-white" style="font-size: var(--text-display)"><slot name="title" /></h1>
+    <div class="mt-4 text-lg leading-relaxed text-brand-100 [&_a]:font-semibold [&_a]:text-white [&_a]:underline [&_strong]:text-white">
+      <slot />
+    </div>
+  </div>
+</section>

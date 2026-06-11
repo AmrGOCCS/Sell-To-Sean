@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import CTASection from '../components/CTASection.astro';
 import { breadcrumbSchema } from '../lib/schema.js';
 
@@ -17,18 +18,18 @@ const projects = [1, 2, 3, 4];
   description={description}
   schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Before & After', path: '/before-after/' }])]}
 >
-  <section class="bg-ice py-12 sm:py-16">
-    <div class="container-site max-w-3xl">
-      <span class="eyebrow">From problem properties to beautiful homes</span>
-      <h1 style="font-size: var(--text-display)">The houses other buyers run from? We buy them.</h1>
-      <p class="mt-4 text-lg leading-relaxed text-slate-700">
-        Many of the houses Sean buys need serious work — roofs, systems, everything. These
-        projects show what happens after closing: local crews turn neglected houses into clean,
-        comfortable homes, and the neighborhood gets a little better. For you, it means one
-        thing: <strong>no condition is too rough to get an offer.</strong>
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow="From problem properties to beautiful homes">
+    <Fragment slot="title">
+      The houses other buyers run from?
+      <span class="inline-block -rotate-1 rounded-xl bg-sun-400 px-2 !text-brand-950">We buy them.</span>
+    </Fragment>
+    <p>
+      Many of the houses Sean buys need serious work — roofs, systems, everything. These
+      projects show what happens after closing: local crews turn neglected houses into clean,
+      comfortable homes. For you it means one thing: <strong>no condition is too rough to get
+      an offer.</strong>
+    </p>
+  </PageHero>
 
   <section class="py-14 sm:py-20" aria-label="Renovation projects">
     <div class="container-site grid gap-8 md:grid-cols-2">

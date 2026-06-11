@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
 import CTASection from '../components/CTASection.astro';
 import { SITE } from '../data/site.js';
@@ -16,18 +17,17 @@ const description =
   description={description}
   schemas={[faqSchema(FAQS), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq/' }])]}
 >
-  <section class="bg-ice py-12 sm:py-16">
-    <div class="container-site max-w-3xl">
-      <span class="eyebrow">No question is too blunt</span>
-      <h1 style="font-size: var(--text-display)">Frequently asked questions</h1>
-      <p class="mt-4 text-lg leading-relaxed text-slate-700">
-        These are the real questions Columbus sellers ask us — including "is this a scam?" and
-        "would an agent get me more?" If your question isn't here, call
-        <a href={SITE.phoneHref} class="font-semibold text-brand-700 underline" data-track="phone_click" data-loc="faq_intro">{SITE.phone}</a>
-        and ask a person.
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow="No question is too blunt">
+    <Fragment slot="title">
+      Ask us <span class="inline-block -rotate-1 rounded-xl bg-sun-400 px-2 !text-brand-950">anything</span> 🤝
+    </Fragment>
+    <p>
+      The real questions Columbus sellers ask us — including "is this a scam?" and "would an
+      agent get me more?" If yours isn't here, call
+      <a href={SITE.phoneHref} data-track="phone_click" data-loc="faq_intro">{SITE.phone}</a>
+      and ask a person.
+    </p>
+  </PageHero>
 
   <section class="py-14 sm:py-20" aria-label="All questions">
     <div class="container-site">

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import HowItWorksSteps from '../components/HowItWorksSteps.astro';
 import OfferMath from '../components/OfferMath.astro';
 import ComparisonTable from '../components/ComparisonTable.astro';
@@ -17,17 +18,17 @@ const description =
   description={description}
   schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'How It Works', path: '/how-it-works/' }])]}
 >
-  <section class="bg-ice py-12 sm:py-16">
-    <div class="container-site max-w-3xl">
-      <span class="eyebrow">The whole process, no surprises</span>
-      <h1 style="font-size: var(--text-display)">How selling your house to Sean works</h1>
-      <p class="mt-4 text-lg leading-relaxed text-slate-700">
-        Here is the entire process, start to finish — including the part most cash buyers won't
-        show you: how the offer number is built. The short version: you give us an address, we
-        give you a written number, and everything after that is your decision.
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow="The whole process, no surprises">
+    <Fragment slot="title">
+      How selling to Sean
+      <span class="inline-block -rotate-1 rounded-xl bg-sun-400 px-2 !text-brand-950">actually works</span>
+    </Fragment>
+    <p>
+      The entire process, start to finish — including the part most cash buyers won't show you:
+      how the offer number is built. Short version: you give us an address, we give you a
+      written number, and everything after that is your decision.
+    </p>
+  </PageHero>
 
   <section class="py-14 sm:py-20" aria-label="The three steps">
     <div class="container-site">

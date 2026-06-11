@@ -16,25 +16,36 @@ const description =
   description={description}
   schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About Sean', path: '/about/' }])]}
 >
-  <section class="bg-ice py-12 sm:py-16">
-    <div class="container-site grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+  <section class="relative overflow-hidden bg-brand-950 py-12 sm:py-16">
+    <div aria-hidden="true" class="absolute inset-0">
+      <div class="blob animate-blob -top-24 -right-24 h-80 w-80 bg-brand-500 opacity-40"></div>
+      <div class="blob animate-blob -bottom-24 -left-16 h-72 w-72 bg-clay-500 opacity-25" style="animation-delay:-6s"></div>
+      <div class="absolute inset-0 opacity-[0.18]" style="background-image: radial-gradient(rgba(247,250,255,0.5) 1px, transparent 1px); background-size: 26px 26px;"></div>
+    </div>
+    <div class="container-site relative grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
-        <span class="eyebrow">{SITE.tagline}</span>
-        <h1 style="font-size: var(--text-display)">The "Sean" in Sell to Sean is a real person.</h1>
-        <p class="mt-4 text-lg leading-relaxed text-slate-700">
+        <span class="eyebrow !text-sun-300">{SITE.tagline}</span>
+        <h1 class="!text-white" style="font-size: var(--text-display)">
+          The "Sean" in Sell to Sean is a
+          <span class="inline-block -rotate-1 rounded-xl bg-sun-400 px-2 !text-brand-950">real person</span>.
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-brand-100">
           Sean Grabow grew up in Columbus, went through a stressful home sale of his own, and
           decided in {SITE.founded} there should be a simpler way for his neighbors to sell.
           That became {SITE.legalName} — better known around town as Sell to Sean.
         </p>
       </div>
-      <img
-        src="/images/sean-profile-pic-2026.webp"
-        alt="Sean Grabow, founder of Sell to Sean (Central City Solutions LLC), in downtown Columbus"
-        width="450"
-        height="450"
-        fetchpriority="high"
-        class="mx-auto w-full max-w-sm rounded-3xl border border-slate-200 shadow-lg"
-      />
+      <div class="relative mx-auto w-full max-w-sm">
+        <div aria-hidden="true" class="absolute -top-4 -right-4 h-full w-full rotate-2 rounded-3xl bg-sun-400"></div>
+        <img
+          src="/images/sean-profile-pic-2026.webp"
+          alt="Sean Grabow, founder of Sell to Sean (Central City Solutions LLC), in downtown Columbus"
+          width="450"
+          height="450"
+          fetchpriority="high"
+          class="relative w-full rounded-3xl border-2 border-brand-950 shadow-lg transition-transform duration-500 hover:scale-[1.02] hover:rotate-1"
+        />
+      </div>
     </div>
   </section>
 

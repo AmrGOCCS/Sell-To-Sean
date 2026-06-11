@@ -14,25 +14,33 @@ const description =
   description={description}
   schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/' }])]}
 >
-  <section class="py-12 sm:py-16">
-    <div class="container-site grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+  <section class="relative overflow-hidden bg-brand-950 py-12 sm:py-16">
+    <div aria-hidden="true" class="absolute inset-0">
+      <div class="blob animate-blob -top-24 -right-24 h-80 w-80 bg-brand-500 opacity-40"></div>
+      <div class="blob animate-blob -bottom-24 -left-16 h-72 w-72 bg-clay-500 opacity-25" style="animation-delay:-6s"></div>
+      <div class="absolute inset-0 opacity-[0.18]" style="background-image: radial-gradient(rgba(247,250,255,0.5) 1px, transparent 1px); background-size: 26px 26px;"></div>
+    </div>
+    <div class="container-site relative grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
       <div>
-        <span class="eyebrow">A real office, real people</span>
-        <h1 style="font-size: var(--text-display)">Talk to us — no pressure, ever.</h1>
-        <p class="mt-4 text-lg leading-relaxed text-slate-700">
+        <span class="eyebrow !text-sun-300">A real office, real people</span>
+        <h1 class="!text-white" style="font-size: var(--text-display)">
+          Talk to us —
+          <span class="inline-block -rotate-1 rounded-xl bg-sun-400 px-2 !text-brand-950">no pressure</span>, ever.
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-brand-100">
           Question about your house, your situation, or whether we're legit? Call, write, or
           come by. You'll get a straight answer either way.
         </p>
 
         <dl class="mt-8 space-y-5">
-          <div class="card">
+          <div class="card-pop reveal">
             <dt class="text-sm font-bold tracking-widest text-brand-600 uppercase">Phone</dt>
             <dd class="mt-1">
               <a href={SITE.phoneHref} class="text-2xl font-bold text-brand-900 underline" data-track="phone_click" data-loc="contact_page">{SITE.phone}</a>
               <p class="mt-1 text-sm text-slate-600">[VERIFY office hours — e.g. Mon–Sat 9am–6pm]</p>
             </dd>
           </div>
-          <div class="card">
+          <div class="card-pop reveal" style="--reveal-delay:100ms">
             <dt class="text-sm font-bold tracking-widest text-brand-600 uppercase">Office</dt>
             <dd class="mt-1 text-slate-700">
               <p class="font-semibold text-slate-900">{SITE.name} ({SITE.legalName})</p>
@@ -40,7 +48,7 @@ const description =
               <a href={SITE.social.googleMaps} rel="noopener" target="_blank" class="mt-2 inline-block font-semibold text-brand-700 underline">Open in Google Maps →</a>
             </dd>
           </div>
-          <div class="card">
+          <div class="card-pop reveal" style="--reveal-delay:200ms">
             <dt class="text-sm font-bold tracking-widest text-brand-600 uppercase">Email</dt>
             <dd class="mt-1 text-slate-700">{SITE.email}</dd>
           </div>

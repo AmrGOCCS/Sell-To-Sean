@@ -15,25 +15,30 @@ const description =
   noStickyCta={true}
   schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Get Your Offer', path: '/get-offer/' }])]}
 >
-  <section class="py-10 sm:py-16">
-    <div class="container-site grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+  <section class="relative overflow-hidden bg-brand-950 py-10 sm:py-16">
+    <div aria-hidden="true" class="absolute inset-0">
+      <div class="blob animate-blob -top-24 -right-24 h-80 w-80 bg-brand-500 opacity-40"></div>
+      <div class="blob animate-blob -bottom-24 -left-16 h-72 w-72 bg-clay-500 opacity-25" style="animation-delay:-6s"></div>
+      <div class="absolute inset-0 opacity-[0.18]" style="background-image: radial-gradient(rgba(247,250,255,0.5) 1px, transparent 1px); background-size: 26px 26px;"></div>
+    </div>
+    <div class="container-site relative grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
       <div class="lg:sticky lg:top-24">
-        <span class="eyebrow">Free · written · no obligation</span>
-        <h1 style="font-size: var(--text-h2)">Let's find out what your house is worth in cash.</h1>
-        <ul class="mt-6 space-y-3 text-slate-700">
-          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-brand-600">✓</span> A real person calls you within {SITE.callbackPromise}</li>
-          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-brand-600">✓</span> Written offer, usually within 24 hours</li>
-          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-brand-600">✓</span> Any condition — repairs and cleanout are our job</li>
-          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-brand-600">✓</span> Your info stays with Sean's team. Never sold.</li>
+        <span class="eyebrow !text-sun-300">Free · written · no obligation</span>
+        <h1 class="!text-white" style="font-size: var(--text-h2)">Let's find out what your house is worth <span class="inline-block -rotate-1 rounded-xl bg-sun-400 px-2 !text-brand-950">in cash</span>.</h1>
+        <ul class="mt-6 space-y-3 text-brand-100">
+          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-sun-400">✓</span> A real person calls you within {SITE.callbackPromise}</li>
+          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-sun-400">✓</span> Written offer, usually within 24 hours</li>
+          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-sun-400">✓</span> Any condition — repairs and cleanout are our job</li>
+          <li class="flex gap-2.5"><span aria-hidden="true" class="font-bold text-sun-400">✓</span> Your info stays with Sean's team. Never sold.</li>
         </ul>
-        <blockquote class="card mt-8 !bg-brand-50 text-slate-700">
+        <blockquote class="card-pop reveal mt-8 text-slate-700">
           "Super easy process, and very easy to work with! They communicated every step of the
           process along the way!"
           <footer class="mt-2 font-bold text-brand-900">— Allison R, Columbus-area seller</footer>
         </blockquote>
-        <p class="mt-6 text-sm text-slate-600">
+        <p class="mt-6 text-sm text-brand-200">
           Rather talk it through? Call
-          <a href={SITE.phoneHref} class="font-bold text-brand-800 underline" data-track="phone_click" data-loc="get_offer_page">{SITE.phone}</a>
+          <a href={SITE.phoneHref} class="font-bold text-white underline" data-track="phone_click" data-loc="get_offer_page">{SITE.phone}</a>
           — a person answers, not a menu.
         </p>
       </div>

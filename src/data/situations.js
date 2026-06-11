@@ -10,6 +10,7 @@ export const SITUATIONS = [
   {
     slug: 'foreclosure',
     persona: 'foreclosure',
+    emoji: '⏰',
     title: 'Sell Your House in Foreclosure in Columbus, Ohio',
     metaTitle: 'Facing Foreclosure in Columbus? You Can Still Sell — Sell to Sean',
     metaDescription:
@@ -56,6 +57,7 @@ export const SITUATIONS = [
   {
     slug: 'inherited-house',
     persona: 'inherited',
+    emoji: '📦',
     title: 'Sell an Inherited House in Columbus, Ohio',
     metaTitle: 'Sell an Inherited or Probate House in Columbus — Sell to Sean',
     metaDescription:
@@ -102,6 +104,7 @@ export const SITUATIONS = [
   {
     slug: 'tired-landlord',
     persona: 'landlord',
+    emoji: '🔑',
     title: 'Sell Your Rental Property in Columbus, Ohio',
     metaTitle: 'Tired Landlord? Sell Your Columbus Rental As-Is — Sell to Sean',
     metaDescription:

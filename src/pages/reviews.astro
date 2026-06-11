@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import TestimonialCards from '../components/TestimonialCards.astro';
 import CTASection from '../components/CTASection.astro';
 import { SITE } from '../data/site.js';
@@ -23,21 +24,19 @@ const description =
   description={description}
   schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Reviews', path: '/reviews/' }])]}
 >
-  <section class="bg-ice py-12 sm:py-16">
-    <div class="container-site max-w-3xl">
-      <span class="eyebrow">{REVIEWS.length} real reviews, word for word</span>
-      <h1 style="font-size: var(--text-display)">What Columbus sellers say about Sell to Sean</h1>
-      <p class="mt-4 text-lg leading-relaxed text-slate-700">
-        Every review below is from a real seller, shown exactly as they wrote it — typos and all.
-        We didn't clean them up, because real beats polished. Want third-party proof? Read our
-        reviews on
-        <a href={SITE.social.googleMaps} rel="noopener" target="_blank" class="font-semibold text-brand-700 underline">Google</a>
-        and
-        <a href={SITE.social.yelp} rel="noopener" target="_blank" class="font-semibold text-brand-700 underline">Yelp</a>
-        where we can't touch them.
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow={`${REVIEWS.length} real reviews, word for word`}>
+    <Fragment slot="title">
+      Columbus sellers,
+      <span class="inline-block -rotate-1 rounded-xl bg-sun-400 px-2 !text-brand-950">unedited</span>
+    </Fragment>
+    <p>
+      Every review below is from a real seller, exactly as they wrote it — typos and all. We
+      didn't clean them up, because real beats polished. Want third-party proof? Read us on
+      <a href={SITE.social.googleMaps} rel="noopener" target="_blank">Google</a> and
+      <a href={SITE.social.yelp} rel="noopener" target="_blank">Yelp</a>, where we can't touch
+      a word.
+    </p>
+  </PageHero>
 
   <section class="py-14 sm:py-20" aria-label="All reviews">
     <div class="container-site">
